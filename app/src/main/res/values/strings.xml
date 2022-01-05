@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">WebRadioPlayer</string>
+
+    <string name="player_activity_name">Media player_(Bound)</string>
+
+    <!-- <string name="media_url_mp3">http://listen.radionomy.com/goth-n-metal.m3u</string> -->
+    <!-- <string name="media_url_mp3">http://streams.deltaradio.de/delta-foehnfrisur/mp3-192/itunes/play.pls</string>  *** not work .pls  -->
+    <string name="media_url_mp3">http://streams.rpr1.de/rpr-metal-128-mp3?usid=0-0-H-M-D-45</string>
+    <!-- <string name="media_url_mp3">https://storage.googleapis.com/exoplayer-test-media-0/Jazz_In_Paris.mp3</string> -->
+
+    <!-- Big Buck Bunny video provided by the Blender Foundation.
+    (c) copyright 2008, Blender Foundation / www.bigbuckbunny.org -->
+    <!-- <string name="media_url_mp4">https://storage.googleapis.com/exoplayer-test-media-0/BigBuckBunny_320x180.mp4</string> -->
+    <string name="media_url_mp4">https://storage.googleapis.com/exoplayer-test-media-0/BigBuckBunny_320x180.mp4</string>
+
+    <string name="media_url_dash"><![CDATA[http://www.youtube.com/get_video_info?&video_id=[I6A4y0vGc7o]&el=info&ps=default&eurl=&gl=US&hl=en]]></string>
+    <!--  <string name="media_url_dash"><![CDATA[http://www.youtube.com/get_video_info?&video_id=[video_id]&el=info&ps=default&eurl=&gl=US&hl=en]]></string> -->
+
+    <string name="logo">Google logo</string>
+
+    <string name="channel_name">channel_name</string>
+    <string name="channel_desc">channel_desc</string>
+
+</resources>
