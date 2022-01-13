@@ -7,39 +7,46 @@ import android.app.Service
     import android.graphics.Bitmap
     import android.net.Uri
     import android.os.IBinder
-    import com.example.webradioplayer.PlayerActivity
-    import com.example.webradioplayer.R
-    import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.Player
     import com.google.android.exoplayer2.SimpleExoPlayer
     import com.google.android.exoplayer2.source.ConcatenatingMediaSource
-    import com.google.android.exoplayer2.source.MediaSource
-    import com.google.android.exoplayer2.source.hls.HlsMediaSource
+import com.google.android.exoplayer2.source.hls.HlsMediaSource
     import com.google.android.exoplayer2.ui.PlayerNotificationManager
     import com.google.android.exoplayer2.upstream.DataSource
-    import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
-    import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
+//import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
     import com.google.android.exoplayer2.util.Util
 import android.os.Binder
+import android.support.v4.media.session.MediaSessionCompat
+import android.util.Log
+import androidx.core.content.ContextCompat
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.example.webradioplayer.CustomPlayerNotificationManager
 
-
-
-
-
-class PlayerNotificationService : Service()
+class PlayerService : Service()
 {
-        private lateinit var mPlayer: SimpleExoPlayer
+    //    private lateinit var mPlayer: SimpleExoPlayer
         private lateinit var dataSourceFactory: DataSource.Factory
-        private lateinit var playerNotificationManager: PlayerNotificationManager
+    //    private lateinit var playerNotificationManager: PlayerNotificationManager
 
         private var notificationId = 123;
         private var channelId = "channelId"
 
 
-    /**
-     * Class for clients to access.  Because we know this service always
-     * runs in the same process as its clients, we don't need to deal with
-     * IPC.
-     */
+
+    private val logTag = PlayerService::class.simpleName
+    //private val binder = LocalBinder()
+    private var isForegroundService = false
+
+    private lateinit var mPlayer: ExoPlayer
+    private lateinit var mediaSession: MediaSessionCompat
+    private lateinit var playerNotificationManager: CustomPlayerNotificationManager
+
+    var currentMediaItem: MediaItem? = null
+        private set
+
+
+
     // Binder given to clients
     private val binder = LocalBinder()
 
@@ -48,8 +55,7 @@ class PlayerNotificationService : Service()
      * runs in the same process as its clients, we don't need to deal with IPC.
      */
     inner class LocalBinder : Binder() {
-        // Return this instance of LocalService so clients can call public methods
-        fun getService(): PlayerNotificationService = this@PlayerNotificationService //@LocalService
+        fun getService(): PlayerService = this@PlayerService
     }
 
     override fun onBind(intent: Intent): IBinder {
@@ -57,8 +63,31 @@ class PlayerNotificationService : Service()
     }
 
 
-        override fun onCreate() {
+    override fun onCreate() {
             super.onCreate()
+
+
+            val sessionActivityPendingIntent =
+                packageManager?.getLaunchIntentForPackage(packageName)?.let { sessionIntent ->
+                    PendingIntent.getActivity(this, 0, sessionIntent, 0)
+                }
+
+            mediaSession = MediaSessionCompat(this, "MusicService")
+                .apply {
+                    setSessionActivity(sessionActivityPendingIntent)
+                    isActive = true
+                }
+
+            playerNotificationManager = CustomPlayerNotificationManager(
+                this,
+                PlayerNotificationListener()
+            )
+
+            mPlayer = ExoPlayer.Builder(this).build()
+
+
+/*
+
             val context = this
             mPlayer = SimpleExoPlayer.Builder(this).build()
             // Create a data source factory.
@@ -125,11 +154,12 @@ class PlayerNotificationService : Service()
             )
             //attach player to playerNotificationManager
             playerNotificationManager.setPlayer(mPlayer)
+        */
         }
 
 
 
-        override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
             return START_STICKY
         }
 
@@ -166,7 +196,8 @@ class PlayerNotificationService : Service()
 
         // detach player
         override fun onDestroy() {
-            playerNotificationManager.setPlayer(null)
+            playerNotificationManager.hideNotification()
+
             mPlayer.release()
             super.onDestroy()
         }
@@ -175,5 +206,59 @@ class PlayerNotificationService : Service()
         override fun onTaskRemoved(rootIntent: Intent?) {
             super.onTaskRemoved(rootIntent)
             stopSelf()
-        } 
+        }
+
+
+    /**
+     * Listen for notification events.
+     */
+    private inner class PlayerNotificationListener :
+        PlayerNotificationManager.NotificationListener {
+        override fun onNotificationPosted(
+            notificationId: Int,
+            notification: Notification,
+            ongoing: Boolean
+        ) {
+            if (ongoing && !isForegroundService) {
+                ContextCompat.startForegroundService(
+                    applicationContext,
+                    Intent(applicationContext, this@PlayerService.javaClass)
+                )
+
+                startForeground(notificationId, notification)
+                isForegroundService = true
+            }
+        }
+
+        override fun onNotificationCancelled(notificationId: Int, dismissedByUser: Boolean) {
+            stopForeground(true)
+            isForegroundService = false
+            stopSelf()
+        }
+    }
+
+
+    fun play(mediaItem: MediaItem) {
+        currentMediaItem = mediaItem
+
+        mPlayer.setMediaItem(currentMediaItem!!)
+        mPlayer.playWhenReady = true
+        mPlayer.prepare()
+
+        playerNotificationManager.showNotificationForPlayer(mPlayer)
+
+        Log.d(logTag, "$currentMediaItem")
+    }
+
+    fun stop() {
+        currentMediaItem = null
+        mPlayer.stop()
+
+        playerNotificationManager.hideNotification()
+
+        Log.d(logTag, "stop")
+    }
+
+
+
     }
