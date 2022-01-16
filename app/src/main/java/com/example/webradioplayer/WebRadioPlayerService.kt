@@ -4,29 +4,23 @@ import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
     import android.content.Intent
-    import android.graphics.Bitmap
-    import android.net.Uri
+import android.net.Uri
     import android.os.IBinder
-import com.google.android.exoplayer2.Player
-    import com.google.android.exoplayer2.SimpleExoPlayer
-    import com.google.android.exoplayer2.source.ConcatenatingMediaSource
+import com.google.android.exoplayer2.source.ConcatenatingMediaSource
 import com.google.android.exoplayer2.source.hls.HlsMediaSource
     import com.google.android.exoplayer2.ui.PlayerNotificationManager
     import com.google.android.exoplayer2.upstream.DataSource
 //import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
-    import com.google.android.exoplayer2.util.Util
 import android.os.Binder
 import android.support.v4.media.session.MediaSessionCompat
 import android.util.Log
 import androidx.core.content.ContextCompat
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.example.webradioplayer.CustomPlayerNotificationManager
 
 class PlayerService : Service()
 {
-    //    private lateinit var mPlayer: SimpleExoPlayer
-        private lateinit var dataSourceFactory: DataSource.Factory
+    private lateinit var dataSourceFactory: DataSource.Factory
     //    private lateinit var playerNotificationManager: PlayerNotificationManager
 
         private var notificationId = 123;
@@ -65,7 +59,6 @@ class PlayerService : Service()
 
     override fun onCreate() {
             super.onCreate()
-
 
             val sessionActivityPendingIntent =
                 packageManager?.getLaunchIntentForPackage(packageName)?.let { sessionIntent ->
@@ -163,6 +156,10 @@ class PlayerService : Service()
             return START_STICKY
         }
 
+
+
+
+
         // concatenatingMediaSource to pass media as a list,
         // so that we can easily prev, next
         private fun getListOfMediaSource(): ConcatenatingMediaSource {
@@ -187,6 +184,10 @@ class PlayerService : Service()
 
         }
 
+
+
+
+
         //build media source to player
         private fun buildMediaSource(videoUrl: String): HlsMediaSource {
             val uri = Uri.parse(videoUrl)
@@ -209,9 +210,6 @@ class PlayerService : Service()
         }
 
 
-    /**
-     * Listen for notification events.
-     */
     private inner class PlayerNotificationListener :
         PlayerNotificationManager.NotificationListener {
         override fun onNotificationPosted(
@@ -239,7 +237,7 @@ class PlayerService : Service()
 
 
     fun play(mediaItem: MediaItem) {
-        currentMediaItem = mediaItem
+        currentMediaItem =  mediaItem
 
         mPlayer.setMediaItem(currentMediaItem!!)
         mPlayer.playWhenReady = true
