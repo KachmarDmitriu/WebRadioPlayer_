@@ -114,7 +114,7 @@ class PlayerActivity : AppCompatActivity()
 
             Toast.makeText(
                 this,
-                "playing: ${playerService.currentMediaItem}",
+                "playing: ${mediaItem}",// временно заменено для проверки, но это не подтягивает имя стануии playerService.currentMediaItem}",
                 Toast.LENGTH_SHORT
             ).show()
         }
