@@ -3,7 +3,10 @@ package com.example.webradioplayer
 import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
-    import android.content.Intent
+import android.content.Context
+import android.content.Intent
+import android.media.AudioManager
+import android.media.AudioManager.OnAudioFocusChangeListener
 import android.net.Uri
     import android.os.IBinder
 import com.google.android.exoplayer2.source.ConcatenatingMediaSource
@@ -22,10 +25,11 @@ class PlayerService : Service()
 {
     private lateinit var dataSourceFactory: DataSource.Factory
     //    private lateinit var playerNotificationManager: PlayerNotificationManager
+    private var audioManager: AudioManager? = null
 
-        private var notificationId = 123;
+
+    private var notificationId = 123;
         private var channelId = "channelId"
-
 
 
     private val logTag = PlayerService::class.simpleName
@@ -60,7 +64,9 @@ class PlayerService : Service()
     override fun onCreate() {
             super.onCreate()
 
-            val sessionActivityPendingIntent =
+       audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+
+        val sessionActivityPendingIntent =
                 packageManager?.getLaunchIntentForPackage(packageName)?.let { sessionIntent ->
                     PendingIntent.getActivity(this, 0, sessionIntent, 0)
                 }
@@ -78,8 +84,7 @@ class PlayerService : Service()
 
             mPlayer = ExoPlayer.Builder(this).build()
 
-
-/*
+    /*
 
             val context = this
             mPlayer = SimpleExoPlayer.Builder(this).build()
@@ -237,6 +242,19 @@ class PlayerService : Service()
 
 
     fun play(mediaItem: MediaItem) {
+
+         val audioFocusResult = audioManager!!.requestAudioFocus(
+            audioFocusChangeListener,
+            AudioManager.STREAM_MUSIC,
+            AudioManager.AUDIOFOCUS_GAIN
+        )
+        if (audioFocusResult != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) return
+
+        // Аудиофокус надо получить строго до вызова setActive!
+        mediaSession.isActive = true
+
+
+
         currentMediaItem =  mediaItem
 
         mPlayer.setMediaItem(currentMediaItem!!)
@@ -254,9 +272,34 @@ class PlayerService : Service()
 
         playerNotificationManager.hideNotification()
 
+        audioManager?.abandonAudioFocus(audioFocusChangeListener);
+
         Log.d(logTag, "stop")
     }
 
+
+
+    private val audioFocusChangeListener =
+        OnAudioFocusChangeListener { focusChange ->
+            when (focusChange) {
+                AudioManager.AUDIOFOCUS_GAIN ->                     // Фокус предоставлен.
+                    // Например, был входящий звонок и фокус у нас отняли.
+                    // Звонок закончился, фокус выдали опять
+                    // и мы продолжили воспроизведение.
+              mediaSessionCallback.onPlay()
+                AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK ->                     // Фокус отняли, потому что какому-то приложению надо
+                    // коротко "крякнуть".
+                    // Например, проиграть звук уведомления или навигатору сказать
+                    // "Через 50 метров поворот направо".
+                    // В этой ситуации нам разрешено не останавливать вопроизведение,
+                    // но надо снизить громкость.
+                    // Приложение не обязано именно снижать громкость,
+                    // можно встать на паузу, что мы здесь и делаем.
+                  mediaSessionCallback.onPause()
+                else ->                     // Фокус совсем отняли.
+                  mediaSessionCallback.onPause()
+            }
+        }
 
 
     }
