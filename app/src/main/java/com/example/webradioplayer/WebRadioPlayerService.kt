@@ -28,12 +28,12 @@ class PlayerService : Service()
     private var audioManager: AudioManager? = null
 
 
-    private var notificationId = 123;
-        private var channelId = "channelId"
+    //  private var notificationId = 123;
+    //    private var channelId = "channelId"
 
 
     private val logTag = PlayerService::class.simpleName
-    //private val binder = LocalBinder()
+
     private var isForegroundService = false
 
     private lateinit var mPlayer: ExoPlayer
@@ -287,7 +287,7 @@ class PlayerService : Service()
                     // Звонок закончился, фокус выдали опять
                     // и мы продолжили воспроизведение.
               mediaSessionCallback.onPlay()
-                AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK ->                     // Фокус отняли, потому что какому-то приложению надо
+                AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK ->                 // Фокус отняли, потому что какому-то приложению надо
                     // коротко "крякнуть".
                     // Например, проиграть звук уведомления или навигатору сказать
                     // "Через 50 метров поворот направо".
