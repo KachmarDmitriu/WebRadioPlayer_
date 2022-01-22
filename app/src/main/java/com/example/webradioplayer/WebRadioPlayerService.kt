@@ -1,5 +1,6 @@
 package com.example.webradioplayer
 
+//import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
@@ -8,18 +9,18 @@ import android.content.Intent
 import android.media.AudioManager
 import android.media.AudioManager.OnAudioFocusChangeListener
 import android.net.Uri
-    import android.os.IBinder
-import com.google.android.exoplayer2.source.ConcatenatingMediaSource
-import com.google.android.exoplayer2.source.hls.HlsMediaSource
-    import com.google.android.exoplayer2.ui.PlayerNotificationManager
-    import com.google.android.exoplayer2.upstream.DataSource
-//import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import android.os.Binder
+import android.os.IBinder
 import android.support.v4.media.session.MediaSessionCompat
 import android.util.Log
 import androidx.core.content.ContextCompat
+import androidx.media.AudioAttributesCompat
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.source.ConcatenatingMediaSource
+import com.google.android.exoplayer2.source.hls.HlsMediaSource
+import com.google.android.exoplayer2.ui.PlayerNotificationManager
+import com.google.android.exoplayer2.upstream.DataSource
 
 class PlayerService : Service()
 {
@@ -45,6 +46,24 @@ class PlayerService : Service()
 
 
 
+    private val audioFocusChangeListener =
+        OnAudioFocusChangeListener { focusChange ->
+            when (focusChange) {
+                AudioManager.AUDIOFOCUS_GAIN ->
+
+                    mediaSessionCallback.Play()
+                AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK ->
+
+                    mediaSessionCallback.Play()
+                else ->
+                    mediaSessionCallback.Stop()
+            }
+        }
+
+
+
+
+
     // Binder given to clients
     private val binder = LocalBinder()
 
@@ -64,7 +83,14 @@ class PlayerService : Service()
     override fun onCreate() {
             super.onCreate()
 
+
        audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+        val audioAttributes = AudioAttributesCompat.Builder()
+            .setContentType(AudioAttributesCompat.CONTENT_TYPE_MUSIC)
+            .setUsage(AudioAttributesCompat.USAGE_MEDIA)
+            .build()
+
+
 
         val sessionActivityPendingIntent =
                 packageManager?.getLaunchIntentForPackage(packageName)?.let { sessionIntent ->
@@ -241,65 +267,44 @@ class PlayerService : Service()
     }
 
 
-    fun play(mediaItem: MediaItem) {
+    private MediaSessionCompat.Callback mediaSessionCallback = new MediaSessionCompat.Callback()
+    {
 
-         val audioFocusResult = audioManager!!.requestAudioFocus(
-            audioFocusChangeListener,
-            AudioManager.STREAM_MUSIC,
-            AudioManager.AUDIOFOCUS_GAIN
-        )
-        if (audioFocusResult != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) return
+        fun play(mediaItem: MediaItem) {
 
-        // Аудиофокус надо получить строго до вызова setActive!
-        mediaSession.isActive = true
+            val audioFocusResult = audioManager!!.requestAudioFocus(
+                audioFocusChangeListener,
+                AudioManager.STREAM_MUSIC,
+                AudioManager.AUDIOFOCUS_GAIN
+            )
+            if (audioFocusResult != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) return
 
-
-
-        currentMediaItem =  mediaItem
-
-        mPlayer.setMediaItem(currentMediaItem!!)
-        mPlayer.playWhenReady = true
-        mPlayer.prepare()
-
-        playerNotificationManager.showNotificationForPlayer(mPlayer)
-
-        Log.d(logTag, "$currentMediaItem")
-    }
-
-    fun stop() {
-        currentMediaItem = null
-        mPlayer.stop()
-
-        playerNotificationManager.hideNotification()
-
-        audioManager?.abandonAudioFocus(audioFocusChangeListener);
-
-        Log.d(logTag, "stop")
-    }
+            // Аудиофокус надо получить строго до вызова setActive!
+            mediaSession.isActive = true
 
 
 
-    private val audioFocusChangeListener =
-        OnAudioFocusChangeListener { focusChange ->
-            when (focusChange) {
-                AudioManager.AUDIOFOCUS_GAIN ->                     // Фокус предоставлен.
-                    // Например, был входящий звонок и фокус у нас отняли.
-                    // Звонок закончился, фокус выдали опять
-                    // и мы продолжили воспроизведение.
-              mediaSessionCallback.onPlay()
-                AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK ->                 // Фокус отняли, потому что какому-то приложению надо
-                    // коротко "крякнуть".
-                    // Например, проиграть звук уведомления или навигатору сказать
-                    // "Через 50 метров поворот направо".
-                    // В этой ситуации нам разрешено не останавливать вопроизведение,
-                    // но надо снизить громкость.
-                    // Приложение не обязано именно снижать громкость,
-                    // можно встать на паузу, что мы здесь и делаем.
-                  mediaSessionCallback.onPause()
-                else ->                     // Фокус совсем отняли.
-                  mediaSessionCallback.onPause()
-            }
+            currentMediaItem = mediaItem
+
+            mPlayer.setMediaItem(currentMediaItem!!)
+            mPlayer.playWhenReady = true
+            mPlayer.prepare()
+
+            playerNotificationManager.showNotificationForPlayer(mPlayer)
+
+            Log.d(logTag, "$currentMediaItem")
         }
 
+        fun stop() {
+            currentMediaItem = null
+            mPlayer.stop()
+
+            playerNotificationManager.hideNotification()
+
+            audioManager?.abandonAudioFocus(audioFocusChangeListener);
+
+            Log.d(logTag, "stop")
+        }
+    }
 
     }

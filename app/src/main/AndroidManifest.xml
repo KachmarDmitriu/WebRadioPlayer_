@@ -17,7 +17,7 @@
         android:theme="@style/Theme.WebRadioPlayer"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".PlayerActivity"
+            android:name=".ui.PlayerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

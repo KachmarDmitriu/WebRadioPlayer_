@@ -1,4 +1,4 @@
-package com.example.webradioplayer
+package com.example.webradioplayer.ui
 
 import android.content.ComponentName
 import android.content.Context
@@ -8,10 +8,11 @@ import android.os.Bundle
 import android.os.IBinder
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.webradioplayer.PlayerService
+import com.example.webradioplayer.R
 import com.example.webradioplayer.databinding.PlayerActivityBinding
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.common.collect.ImmutableList
 
 
 class PlayerActivity : AppCompatActivity()
