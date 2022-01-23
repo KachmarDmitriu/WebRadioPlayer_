@@ -303,6 +303,10 @@ class PlayerService : Service()
 
             audioManager?.abandonAudioFocus(audioFocusChangeListener);
 
+            //unbindService(PlayerService)      //проверить позже или убивает сервис
+            //isForegroundService = false
+
+
             Log.d(logTag, "stop")
         }
     }
