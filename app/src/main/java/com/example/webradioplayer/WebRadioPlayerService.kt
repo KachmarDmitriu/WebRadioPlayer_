@@ -3,7 +3,9 @@ package com.example.webradioplayer
 import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
+import android.content.Context
 import android.content.Intent
+import android.media.AudioManager
 import android.net.Uri
 import android.os.Binder
 import android.os.IBinder
@@ -12,12 +14,12 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.source.ConcatenatingMediaSource
 import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.exoplayer2.upstream.DataSource
 
-class PlayerService : Service() {
+
+class PlayerService : Service(), AudioManager.OnAudioFocusChangeListener {
 
    private lateinit var dataSourceFactory: DataSource.Factory
     private val logTag = PlayerService::class.simpleName
@@ -141,6 +143,55 @@ class PlayerService : Service() {
 
                 Log.d(logTag, "stop")
             }
+
+
+
+    private var audioManager: AudioManager? = null
+
+    override fun onAudioFocusChange(focusState: Int) {
+        //Invoked when the audio focus of the system is updated.
+        when (focusState) {
+            AudioManager.AUDIOFOCUS_GAIN -> {
+                // resume playback
+                if (mPlayer == null) onCreate() else if (!mPlayer.isPlaying()) mPlayer.play()
+                mPlayer.setVolume(1.0f)//, 1.0f)
+            }
+            AudioManager.AUDIOFOCUS_LOSS -> {
+                // Lost focus for an unbounded amount of time: stop playback and release media player
+                if (mPlayer.isPlaying()) mPlayer.stop()
+                mPlayer.release()
+             //   mPlayer = null
+            }
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ->             // Lost focus for a short time, but we have to stop
+                // playback. We don't release the media player because playback
+                // is likely to resume
+                if (mPlayer.isPlaying()) mPlayer.pause()
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK ->             // Lost focus for a short time, but it's ok to keep playing
+                // at an attenuated level
+                if (mPlayer.isPlaying()) mPlayer.setVolume(0.1f)//, 0.1f)
+        }
+    }
+
+   private fun requestAudioFocus(): Boolean {
+        audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val result = audioManager!!.requestAudioFocus(
+            this,
+            AudioManager.STREAM_MUSIC,
+            AudioManager.AUDIOFOCUS_GAIN
+        )
+        return if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+            //Focus gained
+            true
+        } else false
+        //Could not gain focus
+    }
+
+    private fun removeAudioFocus(): Boolean {
+        return AudioManager.AUDIOFOCUS_REQUEST_GRANTED ==
+                audioManager!!.abandonAudioFocus(this)
+    }
+
+
 }
 
 /*
