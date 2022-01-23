@@ -1,13 +1,9 @@
 package com.example.webradioplayer
 
-//import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
-import android.content.Context
 import android.content.Intent
-import android.media.AudioManager
-import android.media.AudioManager.OnAudioFocusChangeListener
 import android.net.Uri
 import android.os.Binder
 import android.os.IBinder
@@ -24,7 +20,6 @@ import com.google.android.exoplayer2.upstream.DataSource
 class PlayerService : Service() {
 
    private lateinit var dataSourceFactory: DataSource.Factory
-   private var audioManager: AudioManager? = null
     private val logTag = PlayerService::class.simpleName
     private var isForegroundService = false
     private lateinit var mPlayer: ExoPlayer
@@ -52,7 +47,12 @@ class PlayerService : Service() {
 
         val sessionActivityPendingIntent =
             packageManager?.getLaunchIntentForPackage(packageName)?.let { sessionIntent ->
-                PendingIntent.getActivity(this, 0, sessionIntent, 0)
+                PendingIntent.getActivity(
+                    this,
+                    0,
+                    sessionIntent,
+                    0
+                )
             }
 
         mediaSession = MediaSessionCompat(this, "MusicService")
@@ -141,9 +141,9 @@ class PlayerService : Service() {
 
                 Log.d(logTag, "stop")
             }
+}
 
-
-
+/*
 private fun getListOfMediaSource(): ConcatenatingMediaSource {
     val mediaUrlList = ArrayList<String>()
     //    mediaUrlList.add("http://streams.rpr1.de/rpr-metal-128-mp3?usid=0-0-H-M-D-45")
@@ -165,8 +165,4 @@ private fun getListOfMediaSource(): ConcatenatingMediaSource {
     return concatenatingMediaSource
 
 }
-
-}
-
-
-}
+*/
