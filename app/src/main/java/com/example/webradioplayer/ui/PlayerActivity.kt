@@ -80,7 +80,7 @@ class PlayerActivity : AppCompatActivity()
 
     private fun onPlay() {
         if (mBound) {
-            val mediaItem = MediaItem.fromUri(getString(R.string.media_url_1))
+            val mediaItem = MediaItem.fromUri(getString(R.string.url_currentRadioStation))
 
             playerService.play(mediaItem)
 
