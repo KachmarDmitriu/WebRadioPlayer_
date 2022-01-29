@@ -17,7 +17,7 @@ interface ListRadiostationDao {
     suspend fun insert(listRadiostation: ListRadiostation)
 
     @Update
-    fun update(listRadiostation: ListRadiostation)
+    suspend fun update(listRadiostation: ListRadiostation)
 
     @Delete
     suspend fun delete(listRadiostation: ListRadiostation)
