@@ -12,7 +12,7 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/nameradio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
