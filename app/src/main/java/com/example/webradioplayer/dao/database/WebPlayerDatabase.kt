@@ -12,7 +12,6 @@ import java.util.concurrent.Executors
 abstract class WebPlayerDatabase : RoomDatabase() {
     abstract fun radiostationDao(): ListRadiostationDao
 
-
     companion object {
         @Volatile
         private var INSTANCE: WebPlayerDatabase? = null

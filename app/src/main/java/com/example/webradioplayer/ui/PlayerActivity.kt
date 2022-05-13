@@ -10,7 +10,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.webradioplayer.PlayerService
 import com.example.webradioplayer.R
+import com.example.webradioplayer.adapters.NoteRadiostationAdapter
+import com.example.webradioplayer.dao.database.ListRadiostation
 import com.example.webradioplayer.databinding.PlayerActivityBinding
+import com.example.webradioplayer.model.NoteRadiostation
 import com.google.android.exoplayer2.MediaItem
 
 
@@ -49,7 +52,7 @@ class PlayerActivity : AppCompatActivity()
         setContentView(binding.root)
 
         setupListeners()
-
+        setupRecycler()
     }
 
 
@@ -59,7 +62,14 @@ class PlayerActivity : AppCompatActivity()
     }
 
 
-        public override fun onStart() {
+    private fun setupRecycler() {
+
+        binding.recyclerView.adapter = CustomAdaper(ListRadiostation)
+
+    }
+
+
+    public override fun onStart() {
             super.onStart()
 
             // Bind to LocalService
