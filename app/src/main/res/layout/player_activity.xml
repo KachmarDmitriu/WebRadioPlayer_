@@ -6,14 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".ui.PlayerActivity">
 
-
-    <ListView
-        android:id="@+id/list_notes"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"
-        tools:listitem="@layout/list_note_radiostation" />
+        android:layout_height="600dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_play"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="1dp"
+
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:reverseLayout="false"
+        />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_play"
@@ -45,5 +50,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="@color/colorPrimary" />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>

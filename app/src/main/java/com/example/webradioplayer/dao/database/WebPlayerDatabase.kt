@@ -12,6 +12,28 @@ import java.util.concurrent.Executors
 abstract class WebPlayerDatabase : RoomDatabase() {
     abstract fun radiostationDao(): ListRadiostationDao
 
+
+    companion object {
+        @Volatile
+        private var INSTANCE: WebPlayerDatabase? = null
+
+        fun getDatabase(context: Context): WebPlayerDatabase {
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context,
+                    WebPlayerDatabase::class.java,
+                    "app_database")
+                    .createFromAsset("database/bus_schedule.db")
+                    .build()
+                INSTANCE = instance
+
+                instance
+            }
+        }
+    }
+
+
+    /*
     companion object {
 
         @Volatile
@@ -25,7 +47,8 @@ abstract class WebPlayerDatabase : RoomDatabase() {
         private fun buildDatabase(context: Context): WebPlayerDatabase {
             return Room.databaseBuilder(
                 context.applicationContext,
-                WebPlayerDatabase::class.java, "LocalAppDB.db"
+                WebPlayerDatabase::class.java,
+                "LocalAppDB.db"
             )
                 // prepopulate the database after onCreate was called
                 .addCallback(object : Callback() {
@@ -62,7 +85,7 @@ abstract class WebPlayerDatabase : RoomDatabase() {
 
     }
 
-
+*/
 
 
 }
