@@ -46,8 +46,8 @@ class NoteRadiostationAdapter(context: Context?) : BaseAdapter() {
             return notes[i]
         }
 
-        override fun getItemId(i: Int): Any {
-            return (getItem(i) as NoteRadiostation)
+        override fun getItemId(i: Int): Long {
+            return notes[i].uid.toLong()
         }
 
         override fun getView(i: Int, view: View, viewGroup: ViewGroup): View {

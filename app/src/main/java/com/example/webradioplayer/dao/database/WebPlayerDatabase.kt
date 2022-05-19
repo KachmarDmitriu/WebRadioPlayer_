@@ -22,7 +22,7 @@ abstract class WebPlayerDatabase : RoomDatabase() {
                     context,
                     WebPlayerDatabase::class.java,
                     "app_database")
-                    .createFromAsset("database/bus_schedule.db")
+                    //    .createFromAsset("database/bus_schedule.db")
                     .build()
                 INSTANCE = instance
 

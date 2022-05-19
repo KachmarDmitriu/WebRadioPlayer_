@@ -12,9 +12,12 @@ import com.example.webradioplayer.PlayerService
 import com.example.webradioplayer.R
 import com.example.webradioplayer.adapters.NoteRadiostationAdapter
 import com.example.webradioplayer.dao.database.ListRadiostation
+import com.example.webradioplayer.dao.database.WebPlayerDatabase
 import com.example.webradioplayer.databinding.PlayerActivityBinding
 import com.example.webradioplayer.model.NoteRadiostation
 import com.google.android.exoplayer2.MediaItem
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 
 
 class PlayerActivity : AppCompatActivity()
@@ -53,7 +56,24 @@ class PlayerActivity : AppCompatActivity()
 
         setupListeners()
         setupRecycler()
-    }
+
+
+        val database = WebPlayerDatabase.getDatabase(this)
+
+/*
+        //TODO видалити, лише для тестування БД
+        GlobalScope.async {
+            database.radiostationDao().insert(
+                ListRadiostation(
+                    nameRadiostation = "test name",
+                    genre = "test genre",
+                    urlRadiostation = ""
+                )
+            )
+        }
+*/
+
+        }
 
 
     private fun setupListeners() {
@@ -64,7 +84,7 @@ class PlayerActivity : AppCompatActivity()
 
     private fun setupRecycler() {
 
-        binding.recyclerView.adapter = CustomAdaper(ListRadiostation)
+        binding.recyclerView.adapter = CustomAdaper(listOf())
 
     }
 
