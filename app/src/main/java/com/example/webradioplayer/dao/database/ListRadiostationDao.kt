@@ -7,7 +7,7 @@ import androidx.room.*
 interface ListRadiostationDao {
 
    @Query("SELECT * FROM playlist_table GROUP BY genre ORDER BY name_radiostation")
-   fun getAllListRadiostation(): LiveData<List<ListRadiostation>?>?
+   fun getAllListRadiostation(): List<ListRadiostation>?//LiveData<List<ListRadiostation>?>?
 
   @Query("SELECT url_radiostation FROM playlist_table WHERE uid = :uid")
   fun getUrlLinkRadiostation(uid: Int):URL_for_MediaItem    //класс для получения ссылки на радио
