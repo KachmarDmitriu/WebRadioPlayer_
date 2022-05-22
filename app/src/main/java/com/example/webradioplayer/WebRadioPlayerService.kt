@@ -75,13 +75,13 @@ class PlayerService : Service(), AudioManager.OnAudioFocusChangeListener {
         return START_STICKY
     }
 
-
+/*
     private fun buildMediaSource(videoUrl: String): HlsMediaSource {
         val uri = Uri.parse(videoUrl)
 
         return HlsMediaSource.Factory(dataSourceFactory).createMediaSource(uri)
     }
-
+*/
 
     override fun onDestroy() {
         playerNotificationManager.hideNotification()

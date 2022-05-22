@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.IBinder
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.webradioplayer.PlayerService
 import com.example.webradioplayer.R
 import com.example.webradioplayer.adapters.NoteRadiostationAdapter
@@ -85,6 +86,8 @@ class PlayerActivity : AppCompatActivity()
     private fun setupRecycler() {
 
         binding.recyclerView.adapter = CustomAdaper(listOf())
+
+        binding.recyclerView.layoutManager =  LinearLayoutManager(this) //???? что делает????
 
     }
 
