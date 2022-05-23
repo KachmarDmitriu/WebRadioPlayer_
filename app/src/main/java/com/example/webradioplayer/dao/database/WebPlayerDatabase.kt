@@ -31,7 +31,7 @@ abstract class WebPlayerDatabase : RoomDatabase() {
         }
     }
 
-
+}
     /*
     companion object {
 
@@ -87,4 +87,38 @@ abstract class WebPlayerDatabase : RoomDatabase() {
 */
 
 
+    /*
+    из  14 шага примера  https://developer.android.com/codelabs/android-room-with-a-view-kotlin#13
+
+    ?? надо или это начальная инициализация??
+
+    private class WordDatabaseCallback(
+    private val scope: CoroutineScope
+) : RoomDatabase.Callback() {
+
+    override fun onCreate(db: SupportSQLiteDatabase) {
+        super.onCreate(db)
+        INSTANCE?.let { database ->
+            scope.launch {
+                populateDatabase(database.wordDao())
+            }
+        }
+    }
+
+    suspend fun populateDatabase(wordDao: WordDao) {
+        // Delete all content here.
+        wordDao.deleteAll()
+
+        // Add sample words.
+        var word = Word("Hello")
+        wordDao.insert(word)
+        word = Word("World!")
+        wordDao.insert(word)
+
+        // TODO: Add your own words!
+    }
 }
+
+     */
+
+
