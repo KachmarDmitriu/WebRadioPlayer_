@@ -5,7 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import java.util.concurrent.Executors
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 @Database(entities = [ListRadiostation::class], version = 1)
 
@@ -16,22 +19,64 @@ abstract class WebPlayerDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: WebPlayerDatabase? = null
 
-        fun getDatabase(context: Context): WebPlayerDatabase {
+        fun getDatabase(context: Context, scope: CoroutineScope): WebPlayerDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context,
+                    context.applicationContext,
                     WebPlayerDatabase::class.java,
-                    "app_database")
-                    //    .createFromAsset("database/bus_schedule.db")
+                    "playlist_database")
+                    .fallbackToDestructiveMigration()
+                    .addCallback(PlaylistDatabaseCallback(scope))
                     .build()
                 INSTANCE = instance
 
                 instance
             }
         }
+
+
+
+        private class PlaylistDatabaseCallback(
+            private val scope: CoroutineScope
+        ) : RoomDatabase.Callback() {
+
+            override fun onCreate(db: SupportSQLiteDatabase) {
+                super.onCreate(db)
+                INSTANCE?.let { database ->
+                    scope.launch {
+                        populateDatabase(database.radiostationDao())
+                    }
+                }
+            }
+        }
+
+        suspend fun populateDatabase(radiostationDao: ListRadiostationDao) {
+
+            radiostationDao.getAllListRadiostation()  // wordDao.deleteAll()
+
+
+          //  val database = WebPlayerDatabase.getDatabase(this)
+
+            GlobalScope.async {
+                //database.
+                radiostationDao.insert(
+                    ListRadiostation(
+                        nameRadiostation = "RPR1.Heavy Metal",
+                        genre = "Metal",
+                        urlRadiostation = "http://streams.rpr1.de/rpr-metal-128-mp3?usid=0-0-H-M-D-45"
+                    )
+                )
+            }
+
+
+            }
+        }
+
+
+
     }
 
-}
+
     /*
     companion object {
 

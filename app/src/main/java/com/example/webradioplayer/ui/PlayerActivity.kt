@@ -15,6 +15,7 @@ import com.example.webradioplayer.adapters.NoteRadiostationAdapter
 import com.example.webradioplayer.dao.database.ListRadiostation
 import com.example.webradioplayer.dao.database.WebPlayerDatabase
 import com.example.webradioplayer.databinding.PlayerActivityBinding
+import com.example.webradioplayer.model.ListRadiostationViewModel
 import com.example.webradioplayer.model.NoteRadiostation
 import com.google.android.exoplayer2.MediaItem
 import kotlinx.coroutines.GlobalScope
@@ -23,6 +24,10 @@ import kotlinx.coroutines.async
 
 class PlayerActivity : AppCompatActivity()
 {
+
+    private val wordViewModel: ListRadiostationViewModel.WordViewModel by viewModels {
+        ListRadiostationViewModel.WordViewModelFactory((application as WordsApplication).repository)
+    }
 
     private val viewBinding by lazy(LazyThreadSafetyMode.NONE) {
         PlayerActivityBinding.inflate(layoutInflater)
@@ -59,9 +64,9 @@ class PlayerActivity : AppCompatActivity()
         setupRecycler()
 
 
-        val database = WebPlayerDatabase.getDatabase(this)
-
+   //    val database = WebPlayerDatabase.getDatabase(this)
 /*
+
         //TODO видалити, лише для тестування БД
         GlobalScope.async {
             database.radiostationDao().insert(
