@@ -9,11 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.webradioplayer.R
 import com.example.webradioplayer.dao.database.ListRadiostation
 
-
-   class CustomAdaper(val  items: List<String>) : RecyclerView.Adapter<CustomAdaper.ViewHolder>()//LISTRADIO_COMPARATOR)
+   class CustomAdaper(val  items: List<String>) : RecyclerView.Adapter<CustomAdaper.ViewHolder>()
+   //class CustomAdaper(val  items: List<String>) : RecyclerView.Adapter<CustomAdaper.ViewHolder>()//LISTRADIO_COMPARATOR)
    {
 //class CustomAdaper(val  items: List<String>):ListAdapter<ListRadiostation, CustomAdaper.ViewHolder>(ListRadiostationComparator()) {
-
 
        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 

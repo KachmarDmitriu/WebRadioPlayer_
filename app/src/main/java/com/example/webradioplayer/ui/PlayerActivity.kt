@@ -1,5 +1,6 @@
 package com.example.webradioplayer.ui
 
+import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -11,22 +12,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.webradioplayer.PlayerService
 import com.example.webradioplayer.R
-import com.example.webradioplayer.adapters.NoteRadiostationAdapter
-import com.example.webradioplayer.dao.database.ListRadiostation
-import com.example.webradioplayer.dao.database.WebPlayerDatabase
 import com.example.webradioplayer.databinding.PlayerActivityBinding
 import com.example.webradioplayer.model.ListRadiostationViewModel
-import com.example.webradioplayer.model.NoteRadiostation
 import com.google.android.exoplayer2.MediaItem
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+
+import androidx.activity.viewModels
+import androidx.lifecycle.observe
+import androidx.recyclerview.widget.RecyclerView
+import com.example.webradioplayer.dao.database.ListRadiostation
 
 
 class PlayerActivity : AppCompatActivity()
 {
 
+    private val newWordActivityRequestCode = 1
     private val wordViewModel: ListRadiostationViewModel.WordViewModel by viewModels {
-        ListRadiostationViewModel.WordViewModelFactory((application as WordsApplication).repository)
+        ListRadiostationViewModel.WordViewModelFactory((application as ListRadoistationApplication).repository)
     }
 
     private val viewBinding by lazy(LazyThreadSafetyMode.NONE) {
@@ -62,6 +63,20 @@ class PlayerActivity : AppCompatActivity()
 
         setupListeners()
         setupRecycler()
+/*
+        // Add an observer on the LiveData returned by getAlphabetizedWords.
+        // The onChanged() method fires when the observed data changes and the activity is
+        // in the foreground.
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
+        val adapter = CustomAdaper
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+         wordViewModel.allWords.observe(owner = this) { words ->
+            // Update the cached copy of the words in the adapter.
+            words.let { adapter}//submitList(it) }
+ */
+    }
 
 
    //    val database = WebPlayerDatabase.getDatabase(this)
@@ -77,9 +92,34 @@ class PlayerActivity : AppCompatActivity()
                 )
             )
         }
-*/
 
+
+        }Lj,fdkty dtcm rjl
+/*
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intentData)
+
+        if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
+            intentData?.getStringExtra(NewWordActivity.EXTRA_REPLY)?.let { reply ->
+                val word = ListRadiostation(reply)
+                wordViewModel.insert(word)  // uid, name ,url, genre
+            }
+        } else {
+
+
+            Toast.makeText(
+                applicationContext,
+                R.string.empty_not_saved,
+                Toast.LENGTH_LONG
+            ).show()
         }
+
+    }
+    */
+ */
+
+
+
 
 
     private fun setupListeners() {
@@ -140,10 +180,3 @@ class PlayerActivity : AppCompatActivity()
     }
 
 }
-
-/*
-    //    mediaUrlList.add("http://streams.rpr1.de/rpr-metal-128-mp3?usid=0-0-H-M-D-45")
-    //    mediaUrlList.add("https://storage.googleapis.com/exoplayer-test-media-0/Jazz_In_Paris.mp3")
-    //    mediaUrlList.add("http://listen.radionomy.com/goth-n-metal.m3u")
-    //    mediaUrlList.add("http://streams.deltaradio.de/delta-foehnfrisur/mp3-192/itunes/play.pls")
-            = */
