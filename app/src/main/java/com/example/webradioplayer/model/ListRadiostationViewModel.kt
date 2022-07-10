@@ -5,7 +5,6 @@ import com.example.webradioplayer.dao.database.ListRadiostation
 import com.example.webradioplayer.dao.database.ListRadiostationRepository
 import kotlinx.coroutines.launch
 
-
 class ListRadiostationViewModel {
 
     class WordViewModel(private val repository: ListRadiostationRepository) : ViewModel() {
@@ -16,10 +15,9 @@ class ListRadiostationViewModel {
         // - Repository is completely separated from the UI through the ViewModel.
         val allWords: LiveData<List<ListRadiostation>> = repository.allWords.asFlow().asLiveData() //??? repository.allWords.asLiveData()
 
-        /**
-         * Launching a new coroutine to insert the data in a non-blocking way
-         */
-        fun insert(listRadiostation: ListRadiostation ) = viewModelScope.launch {
+
+       // * Launching a new coroutine to insert the data in a non-blocking way
+       fun insert(listRadiostation: ListRadiostation ) = viewModelScope.launch {
             repository.insert(listRadiostation)
         }
     }

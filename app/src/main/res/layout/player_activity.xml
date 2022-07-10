@@ -11,6 +11,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="600dp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/button_play"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="1dp"
