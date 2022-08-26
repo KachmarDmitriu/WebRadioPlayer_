@@ -137,7 +137,7 @@ class PlayerService : Service(), AudioManager.OnAudioFocusChangeListener {
                 Log.d(logTag, "stop")
             }
 
-//**
+
     override fun onAudioFocusChange(focusState: Int) {
         //Invoked when the audio focus of the system is updated.
         when (focusState) {

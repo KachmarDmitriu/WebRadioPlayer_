@@ -7,20 +7,19 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [Playlist::class], version = 1)
 
-abstract class WebPlayerDatabase : RoomDatabase() {
+abstract class PlaylistDatabase : RoomDatabase() {
     abstract fun playlistDao(): PlaylistDao
 
     companion object {
         @Volatile
-        private var INSTANCE: WebPlayerDatabase? = null
+        private var INSTANCE: PlaylistDatabase? = null
 
-        fun getDatabase(context: Context): WebPlayerDatabase {
+        fun getDatabase(context: Context): PlaylistDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context,
-                    WebPlayerDatabase::class.java,
+                    PlaylistDatabase::class.java,
                     "app_database")
-                    //    .createFromAsset("database/bus_schedule.db")
                     .build()
                 INSTANCE = instance
 

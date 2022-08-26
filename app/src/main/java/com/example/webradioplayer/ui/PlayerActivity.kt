@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.webradioplayer.PlayerService
 import com.example.webradioplayer.R
-import com.example.webradioplayer.dao.database.WebPlayerDatabase
 import com.example.webradioplayer.databinding.PlayerActivityBinding
 import com.google.android.exoplayer2.MediaItem
 
@@ -78,7 +77,7 @@ class PlayerActivity : AppCompatActivity()
 
     private fun setupRecycler() {
 
-        binding.recyclerView.adapter = CustomAdaper(listOf())
+        binding.recyclerview.adapter = CustomAdaper(listOf())
 
     }
 
