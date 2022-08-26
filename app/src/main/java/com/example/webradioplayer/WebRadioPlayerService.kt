@@ -76,13 +76,6 @@ class PlayerService : Service(), AudioManager.OnAudioFocusChangeListener {
     }
 
 
-    private fun buildMediaSource(videoUrl: String): HlsMediaSource {
-        val uri = Uri.parse(videoUrl)
-
-        return HlsMediaSource.Factory(dataSourceFactory).createMediaSource(uri)
-    }
-
-
     override fun onDestroy() {
         playerNotificationManager.hideNotification()
 
@@ -145,16 +138,13 @@ class PlayerService : Service(), AudioManager.OnAudioFocusChangeListener {
             }
 
 
-
-    private var audioManager: AudioManager? = null
-
     override fun onAudioFocusChange(focusState: Int) {
         //Invoked when the audio focus of the system is updated.
         when (focusState) {
             AudioManager.AUDIOFOCUS_GAIN -> {
                 // resume playback
                 if (mPlayer == null) onCreate() else if (!mPlayer.isPlaying()) mPlayer.play()
-                mPlayer.setVolume(1.0f)//, 1.0f)
+                mPlayer.setVolume(1.0f)
             }
             AudioManager.AUDIOFOCUS_LOSS -> {
                 // Lost focus for an unbounded amount of time: stop playback and release media player
@@ -168,53 +158,9 @@ class PlayerService : Service(), AudioManager.OnAudioFocusChangeListener {
                 if (mPlayer.isPlaying()) mPlayer.pause()
             AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK ->             // Lost focus for a short time, but it's ok to keep playing
                 // at an attenuated level
-                if (mPlayer.isPlaying()) mPlayer.setVolume(0.1f)//, 0.1f)
+                if (mPlayer.isPlaying()) mPlayer.setVolume(0.1f)
         }
     }
 
-   private fun requestAudioFocus(): Boolean {
-        audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        val result = audioManager!!.requestAudioFocus(
-            this,
-            AudioManager.STREAM_MUSIC,
-            AudioManager.AUDIOFOCUS_GAIN
-        )
-        return if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-            //Focus gained
-            true
-        } else false
-        //Could not gain focus
-    }
-
-    private fun removeAudioFocus(): Boolean {
-        return AudioManager.AUDIOFOCUS_REQUEST_GRANTED ==
-                audioManager!!.abandonAudioFocus(this)
-    }
-
-
 
 }
-
-/*
-private fun getListOfMediaSource(): ConcatenatingMediaSource {
-    val mediaUrlList = ArrayList<String>()
-    //    mediaUrlList.add("http://streams.rpr1.de/rpr-metal-128-mp3?usid=0-0-H-M-D-45")
-    //    mediaUrlList.add("https://storage.googleapis.com/exoplayer-test-media-0/Jazz_In_Paris.mp3")
-    //    mediaUrlList.add("http://listen.radionomy.com/goth-n-metal.m3u")
-    //    mediaUrlList.add("http://streams.deltaradio.de/delta-foehnfrisur/mp3-192/itunes/play.pls")
-
-    mediaUrlList.add("https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
-    mediaUrlList.add("https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8")
-    mediaUrlList.add("http://d3rlna7iyyu8wu.cloudfront.net/skip_armstrong/skip_armstrong_stereo_subs.m3u8")
-    mediaUrlList.add("https://moctobpltc-i.akamaihd.net/hls/live/571329/eight/playlist.m3u8")
-    mediaUrlList.add("https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8")
-
-    val concatenatingMediaSource = ConcatenatingMediaSource()
-    for (mediaUrl in mediaUrlList) {
-        concatenatingMediaSource.addMediaSource(buildMediaSource(mediaUrl))
-    }
-
-    return concatenatingMediaSource
-
-}
-*/

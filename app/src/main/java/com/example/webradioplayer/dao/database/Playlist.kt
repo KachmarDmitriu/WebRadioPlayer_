@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity (tableName = "playlist_table")
-data class ListRadiostation(
+data class Playlist(
     @PrimaryKey (autoGenerate = true)
     var uid: Int = 0,
 
