@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WebRadioPlayer"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:name=".WebRadioPlayerApplication">
         <activity
             android:name=".ui.PlayerActivity"
             android:exported="true">

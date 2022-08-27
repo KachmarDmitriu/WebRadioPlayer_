@@ -11,11 +11,18 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.webradioplayer.PlayerService
 import com.example.webradioplayer.R
 import com.example.webradioplayer.databinding.PlayerActivityBinding
+import com.example.webradioplayer.model.PlaylistViewModel
 import com.google.android.exoplayer2.MediaItem
+import androidx.activity.viewModels
+import com.example.webradioplayer.model.PlaylistViewModelFactory
 
 
 class PlayerActivity : AppCompatActivity()
 {
+    private val wordViewModel: PlaylistViewModel by viewModels {
+        PlaylistViewModelFactory((application as  WordsApplication).repository)
+    }
+
 
     private val viewBinding by lazy(LazyThreadSafetyMode.NONE) {
         PlayerActivityBinding.inflate(layoutInflater)
