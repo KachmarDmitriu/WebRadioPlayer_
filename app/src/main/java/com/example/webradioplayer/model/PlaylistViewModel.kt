@@ -1,24 +1,25 @@
 package com.example.webradioplayer.model
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.example.webradioplayer.dao.database.Playlist
-import com.example.webradioplayer.dao.database.PlaylistDao
+import kotlinx.coroutines.launch
 
-class PlaylistViewModel(private val playlistDao: PlaylistDao): ViewModel() {
 
-    val allWords: LiveData<List<Playlist>?>? = playlistDao.getPlaylist()
+class PlaylistViewModel(private val repository: PlaylistRepository): ViewModel() {
 
-    fun insert(playlist: Playlist) = playlistDao.insert(playlist)
+    val allPlaylist: LiveData<List<Playlist>> = repository.allPlaylist.asFlow().asLiveData()
+
+    fun insert(playlist: Playlist) = viewModelScope.launch {
+        repository.insert(playlist)
+    }               // playlistDao.insert(playlist)
 }
 
 
-class PlaylistViewModelFactory(private val playlistDao: PlaylistDao) : ViewModelProvider.Factory {
+class PlaylistViewModelFactory(private val repository: PlaylistRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PlaylistViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return PlaylistViewModel(playlistDao) as T
+            return PlaylistViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

@@ -7,7 +7,7 @@ import androidx.room.*
 interface PlaylistDao {
 
    @Query("SELECT * FROM playlist_table ORDER BY name_radiostation")
-   fun getPlaylist(): LiveData<List<Playlist>?>?
+   fun getPlaylist(): LiveData<List<Playlist>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(radiostation: Playlist)

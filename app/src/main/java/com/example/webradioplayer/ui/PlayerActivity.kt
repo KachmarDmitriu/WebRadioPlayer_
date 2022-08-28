@@ -10,17 +10,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.webradioplayer.PlayerService
 import com.example.webradioplayer.R
+import com.example.webradioplayer.WebRadioPlayerApplication
 import com.example.webradioplayer.databinding.PlayerActivityBinding
 import com.example.webradioplayer.model.PlaylistViewModel
+import com.example.webradioplayer.model.PlaylistViewModelFactory
 import com.google.android.exoplayer2.MediaItem
 import androidx.activity.viewModels
-import com.example.webradioplayer.model.PlaylistViewModelFactory
-
+import androidx.lifecycle.*
+import kotlinx.coroutines.launch
 
 class PlayerActivity : AppCompatActivity()
 {
-    private val wordViewModel: PlaylistViewModel by viewModels {
-        PlaylistViewModelFactory((application as  WordsApplication).repository)
+    private val playlistViewModel: PlaylistViewModel by viewModels {
+        PlaylistViewModelFactory(application as WebRadioPlayerApplication)
+                            //((application as WebRadioPlayerApplication).repository)
     }
 
 
@@ -94,7 +97,7 @@ class PlayerActivity : AppCompatActivity()
 
             // Bind to LocalService
             Intent(this, PlayerService::class.java).also { intent ->
-                bindService(intent, connection, Context.BIND_AUTO_CREATE)
+                bindService(intent, connection, BIND_AUTO_CREATE)
             }
         }
 
