@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 class PlaylistViewModel(private val repository: PlaylistRepository): ViewModel() {
 
     val allPlaylist: LiveData<List<Playlist>> = repository.allPlaylist.asFlow().asLiveData()
-
+                                // .asFlow().asLiveData() это номально?? для чего .asFlow() ???
     fun insert(playlist: Playlist) = viewModelScope.launch {
         repository.insert(playlist)
     }               // playlistDao.insert(playlist)

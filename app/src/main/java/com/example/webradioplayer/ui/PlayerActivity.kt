@@ -1,5 +1,6 @@
 package com.example.webradioplayer.ui
 
+import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -16,6 +17,10 @@ import com.example.webradioplayer.model.PlaylistViewModel
 import com.example.webradioplayer.model.PlaylistViewModelFactory
 import com.google.android.exoplayer2.MediaItem
 import androidx.activity.viewModels
+import androidx.lifecycle.observe
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.webradioplayer.dao.database.Playlist
 
 
 class PlayerActivity : AppCompatActivity()
@@ -61,7 +66,7 @@ class PlayerActivity : AppCompatActivity()
         setupRecycler()
 
 
-/*
+        /*
         val database = WebPlayerDatabase.getDatabase(this)
 
         //TODO видалити, лише для тестування БД
@@ -91,8 +96,42 @@ class PlayerActivity : AppCompatActivity()
     private fun setupRecycler() {
 
        //  binding.recyclerview.adapter = CustomAdaper(listOf())
+       // val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+        val adapter = PlaylistAdapter()
+        binding.recyclerview.adapter = PlaylistAdapter()
+        binding.recyclerview.layoutManager = LinearLayoutManager(this)
+
+        // Add an observer on the LiveData returned by getAlphabetizedWords.
+        // The onChanged() method fires when the observed data changes and the activity is
+        // in the foreground.
+        playlistViewModel.allPlaylist.observe(owner = this, onChanged = fun(words: List<Playlist>) {
+            // Update the cached copy of the words in the adapter.
+            words.let { adapter.submitList(it) }
+        })
 
     }
+
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intentData)
+
+        if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
+            intentData?.getStringExtra(AddNewRadioActivity.EXTRA_REPLY)?.let { reply ->
+                val playlist = Playlist(reply)              //как правильно отобразить два поля
+                playlistViewModel.insert(playlist)
+            }
+        } else {
+            Toast.makeText(
+                applicationContext,
+                R.string.empty_not_saved,
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
+
+
 
 
     public override fun onStart() {
