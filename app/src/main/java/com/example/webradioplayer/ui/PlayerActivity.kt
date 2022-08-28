@@ -16,16 +16,15 @@ import com.example.webradioplayer.model.PlaylistViewModel
 import com.example.webradioplayer.model.PlaylistViewModelFactory
 import com.google.android.exoplayer2.MediaItem
 import androidx.activity.viewModels
-import androidx.lifecycle.*
-import kotlinx.coroutines.launch
+
 
 class PlayerActivity : AppCompatActivity()
 {
-    private val playlistViewModel: PlaylistViewModel by viewModels {
-        PlaylistViewModelFactory(application as WebRadioPlayerApplication)
-                            //((application as WebRadioPlayerApplication).repository)
-    }
+    private val newWordActivityRequestCode = 1
 
+    private val playlistViewModel: PlaylistViewModel by viewModels {
+        PlaylistViewModelFactory((application as WebRadioPlayerApplication).repository)
+    }
 
     private val viewBinding by lazy(LazyThreadSafetyMode.NONE) {
         PlayerActivityBinding.inflate(layoutInflater)
@@ -61,6 +60,7 @@ class PlayerActivity : AppCompatActivity()
         setupListeners()
         setupRecycler()
 
+
 /*
         val database = WebPlayerDatabase.getDatabase(this)
 
@@ -82,12 +82,15 @@ class PlayerActivity : AppCompatActivity()
     private fun setupListeners() {
         binding.buttonPlay.setOnClickListener { onPlay() }
         binding.buttonStop.setOnClickListener { onStopPlaying() }
+        binding.fab.setOnClickListener {
+            val intent = Intent(this@PlayerActivity, AddNewRadioActivity::class.java)
+            startActivityForResult(intent, newWordActivityRequestCode) }
     }
 
 
     private fun setupRecycler() {
 
-        binding.recyclerview.adapter = CustomAdaper(listOf())
+       //  binding.recyclerview.adapter = CustomAdaper(listOf())
 
     }
 
