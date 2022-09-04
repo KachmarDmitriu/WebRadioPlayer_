@@ -1,12 +1,11 @@
-package com.example.webradioplayer.model
+package com.example.webradioplayer
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
-import com.example.webradioplayer.dao.database.Playlist
-import com.example.webradioplayer.dao.database.PlaylistDao
-import kotlinx.coroutines.flow.Flow
+import com.example.webradioplayer.database.entity.Playlist
+import com.example.webradioplayer.database.dao.PlaylistDao
 
-class PlaylistRepository (private val playlistDao: PlaylistDao) {
+class DataRepository (private val playlistDao: PlaylistDao) {
 
        val allPlaylist: LiveData<List<Playlist>> = playlistDao.getPlaylist()
 

@@ -1,9 +1,11 @@
-package com.example.webradioplayer.dao.database
+package com.example.webradioplayer.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.webradioplayer.database.dao.PlaylistDao
+import com.example.webradioplayer.database.entity.Playlist
 import kotlinx.coroutines.CoroutineScope
 
 @Database(entities = [Playlist::class], version = 1)

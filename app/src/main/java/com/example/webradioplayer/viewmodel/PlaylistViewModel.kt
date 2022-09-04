@@ -1,11 +1,12 @@
 package com.example.webradioplayer.model
 
 import androidx.lifecycle.*
-import com.example.webradioplayer.dao.database.Playlist
+import com.example.webradioplayer.DataRepository
+import com.example.webradioplayer.database.entity.Playlist
 import kotlinx.coroutines.launch
 
 
-class PlaylistViewModel(private val repository: PlaylistRepository): ViewModel() {
+class PlaylistViewModel(private val repository: DataRepository): ViewModel() {
 
     val allPlaylist: LiveData<List<Playlist>> = repository.allPlaylist.asFlow().asLiveData()
                                 // .asFlow().asLiveData() это номально?? для чего .asFlow() ???
@@ -15,7 +16,7 @@ class PlaylistViewModel(private val repository: PlaylistRepository): ViewModel()
 }
 
 
-class PlaylistViewModelFactory(private val repository: PlaylistRepository) : ViewModelProvider.Factory {
+class PlaylistViewModelFactory(private val repository: DataRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PlaylistViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

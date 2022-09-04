@@ -1,7 +1,8 @@
-package com.example.webradioplayer.dao.database
+package com.example.webradioplayer.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.webradioplayer.database.entity.Playlist
 
 @Dao
 interface PlaylistDao {

@@ -2,7 +2,6 @@ package com.example.webradioplayer.ui
 
 import android.app.Activity
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
@@ -19,8 +18,7 @@ import com.google.android.exoplayer2.MediaItem
 import androidx.activity.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.webradioplayer.dao.database.Playlist
+import com.example.webradioplayer.database.entity.Playlist
 
 
 class PlayerActivity : AppCompatActivity()

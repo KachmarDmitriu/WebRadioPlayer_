@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.webradioplayer.R
-import com.example.webradioplayer.dao.database.Playlist
+import com.example.webradioplayer.database.entity.Playlist
 
 
 class PlaylistAdapter : ListAdapter<Playlist, PlaylistAdapter.PlaylistViewHolder>(PLAYLIST_COMPARATOR){

@@ -1,4 +1,4 @@
-package com.example.webradioplayer.dao.database
+package com.example.webradioplayer.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
