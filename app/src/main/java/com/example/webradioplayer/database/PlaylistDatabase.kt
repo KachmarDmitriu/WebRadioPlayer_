@@ -1,9 +1,14 @@
 package com.example.webradioplayer.database
 
 import android.content.Context
+import androidx.annotation.VisibleForTesting
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.webradioplayer.database.dao.GenreDao
 import com.example.webradioplayer.database.dao.PlaylistDao
 import com.example.webradioplayer.database.entity.Genre
@@ -15,7 +20,6 @@ import kotlinx.coroutines.CoroutineScope
 abstract class PlaylistDatabase : RoomDatabase() {
     abstract fun playlistDao(): PlaylistDao
     abstract fun genreDao(): GenreDao
-
 
 
     companion object {

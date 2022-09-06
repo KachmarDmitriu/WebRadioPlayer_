@@ -11,6 +11,6 @@ interface PlaylistDao {
    fun getPlaylist(): LiveData<List<Playlist>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(radiostation: Playlist)
+    fun insertRadiostation(radiostation: Playlist)
 
 }

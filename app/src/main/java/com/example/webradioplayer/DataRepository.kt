@@ -12,7 +12,7 @@ class DataRepository (private val playlistDao: PlaylistDao) {
         @Suppress("RedundantSuspendModifier")
         @WorkerThread
         suspend fun insert(playlist: Playlist) {
-            playlistDao.insert(playlist)
+            playlistDao.insertRadiostation(playlist)
         }
 
 

@@ -2,17 +2,16 @@ package com.example.webradioplayer.database.entity
 
 import androidx.room.*
 import com.example.webradioplayer.model.IPlaylist
-import java.util.*
 
 @Entity(
     tableName = "playlist_table",
     foreignKeys = [ForeignKey(
             entity = Genre::class,
-            parentColumns = "id_genre",
-            childColumns  = "id_genre_pls",
+            parentColumns = ["id_genre"],
+            childColumns  = ["id_genre_pls"],
             onDelete = ForeignKey.CASCADE
         )],
-    indices = [Index(value = "id_genre_pls")]
+    indices = [Index(value = ["id_genre_pls"])]
 )
 
 class Playlist : IPlaylist {
@@ -23,6 +22,23 @@ class Playlist : IPlaylist {
     var name_radiostation: String? = null
     var url_radiostation: String? = null
 
+    override var idPlaylist: Int
+        get() = id_playlist
+        set(value) {this.idPlaylist = value}
+
+    override var idGenre: Int
+        get() = id_genre_pls
+        set(value) {this.idGenre = value}
+
+    override var nameRadiostation: String?
+        get() = name_radiostation
+        set(value) {this.nameRadiostation = value}
+
+    override var urlRadiostation: String?
+        get() = url_radiostation
+        set(value) {this.urlRadiostation = value}
+
+    /*@Override
     fun getidPlaylist(): Int {
         return id_playlist
     }
@@ -31,6 +47,7 @@ class Playlist : IPlaylist {
         this.idPlaylist = id_playlist
     }
 
+    @Override
     fun getidGenre(): Int {
         return id_genre_pls
     }
@@ -39,6 +56,7 @@ class Playlist : IPlaylist {
         this.idGenre = id_genre_pls
     }
 
+    @Override
     fun getnameRadiostation(): String {
         return name_radiostation!!
     }
@@ -47,6 +65,7 @@ class Playlist : IPlaylist {
         this.nameRadiostation = name_radiostation
     }
 
+    @Override
     fun geturlRadiostation(): String {
         return url_radiostation!!
     }
@@ -54,7 +73,7 @@ class Playlist : IPlaylist {
     fun seturlRadiostation(name_radiostation: String?) {
         this.urlRadiostation = url_radiostation
     }
-
+*/
     constructor() {}
 
     @Ignore
@@ -72,4 +91,5 @@ class Playlist : IPlaylist {
         name_radiostation = playlist.nameRadiostation
         url_radiostation = playlist.urlRadiostation
     }
+
 }

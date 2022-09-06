@@ -7,11 +7,19 @@ import com.example.webradioplayer.model.IGenre
 import com.example.webradioplayer.model.IPlaylist
 
 @Entity(tableName = "genre_table")
-class Genre: IGenre {
+class Genre : IGenre {
 
         @PrimaryKey
         var id_genre = 0
         var genre_name : String? = null
+
+    override var id: Int
+        get() = id_genre
+        set(value) {this.id = value}
+
+    override var genre: String?
+        get() = genre_name
+        set(value) {this.genre = value}
 
         constructor() {}
 
