@@ -8,9 +8,11 @@ import com.example.webradioplayer.database.entity.Playlist
 interface PlaylistDao {
 
    @Query("SELECT * FROM playlist_table ORDER BY name_radiostation")
-   fun getPlaylist(): LiveData<List<Playlist>>
+   fun getAllPlaylist(): LiveData<List<Playlist>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertRadiostation(radiostation: Playlist)
 
+    @Query("select * from playlist_table where id_playlist = :radiostationId")
+    fun loadProduct(radiostationId: Int): LiveData<Playlist?>?
 }

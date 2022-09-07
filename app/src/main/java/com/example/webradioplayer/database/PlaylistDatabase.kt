@@ -22,6 +22,17 @@ abstract class PlaylistDatabase : RoomDatabase() {
     abstract fun genreDao(): GenreDao
 
 
+    private val mIsDatabaseCreated = MutableLiveData<Boolean>()
+
+    private fun setDatabaseCreated() {
+        mIsDatabaseCreated.postValue(true)
+    }
+
+    val databaseCreated: LiveData<Boolean>
+        get() = mIsDatabaseCreated
+
+
+
     companion object {
         @Volatile
         private var INSTANCE: PlaylistDatabase? = null
