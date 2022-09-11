@@ -5,7 +5,7 @@ import androidx.room.*
 import com.example.webradioplayer.database.entity.Playlist
 
 @Dao
-interface PlaylistDao {
+interface IPlaylistDao {
 
    @Query("SELECT * FROM playlist_table ORDER BY name_radiostation")
    fun getAllPlaylist(): LiveData<List<Playlist>>

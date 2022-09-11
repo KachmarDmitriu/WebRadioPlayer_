@@ -11,16 +11,16 @@ import com.example.webradioplayer.R
 
 class AddNewRadioActivity: AppCompatActivity() {
 
-   public override fun onCreate(savedInstanceState: Bundle?) {
+    public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_new_radio_activity)
 
         val editNameView = findViewById<EditText>(R.id.edit_name)
-       val editUrlView = findViewById<EditText>(R.id.edit_url)
+        val editUrlView = findViewById<EditText>(R.id.edit_url)
 
         val button = findViewById<Button>(R.id.button_save)
 
-       // только для поля name, что делать для url
+        // только для поля name, что делать для url
         button.setOnClickListener {
             val replyIntent = Intent()
             if (TextUtils.isEmpty(editNameView.text)) {
@@ -36,5 +36,7 @@ class AddNewRadioActivity: AppCompatActivity() {
 
     companion object {
         const val EXTRA_REPLY = "com.example.android.wordlistsql.REPLY"
+
+    }
 
 }
