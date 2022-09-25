@@ -7,19 +7,6 @@ import com.example.webradioplayer.database.PlaylistDatabase
 import com.example.webradioplayer.database.entity.Genre
 import com.example.webradioplayer.database.entity.Playlist
 
-/*
-class DataRepository (private val playlistDao: PlaylistDao) {
-
-       val allPlaylist: LiveData<List<Playlist>> = playlistDao.getPlaylist()
-
-        @Suppress("RedundantSuspendModifier")
-        @WorkerThread
-        suspend fun insert(playlist: Playlist) {
-            playlistDao.insertRadiostation(playlist)
-        }
-
-}*/
-
 
 class DataRepository private constructor(private var mDatabase: PlaylistDatabase) {
 
