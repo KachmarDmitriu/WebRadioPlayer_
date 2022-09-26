@@ -2,7 +2,6 @@ package com.example.webradioplayer
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Observer
 import com.example.webradioplayer.database.PlaylistDatabase
 import com.example.webradioplayer.database.entity.Genre
 import com.example.webradioplayer.database.entity.Playlist
@@ -10,22 +9,23 @@ import com.example.webradioplayer.database.entity.Playlist
 
 class DataRepository private constructor(private var mDatabase: PlaylistDatabase) {
 
-    private var mObservableProducts: MediatorLiveData<List<Playlist>>
+    private val mObservableGenre: MediatorLiveData<List<Genre>>
 
-    /**
-     * Get the list of products from the database and get notified when the data changes.
-     */
-    val products: MediatorLiveData<List<Playlist>>
-        get() = mObservableProducts
+    val get_genre: LiveData<List<Genre>>
+        get() = mObservableGenre
 
-    fun loadRadiostation(radiostationId: Int): LiveData<Playlist?>? {
-        return mDatabase.playlistDao().loadProduct(radiostationId)
-    }
-
-    fun loadGenre(genreId: Int): LiveData<List<Genre?>?>? {
+    fun loadGenre(genreId: Int): LiveData<Genre> {
         return mDatabase.genreDao().loadGenre(genreId)
     }
-/*
+
+    fun loadPlaylist(playlistId: Int): LiveData<Playlist> {
+        return mDatabase.playlistDao().loadPlaylist(playlistId)
+    }
+
+
+    *************
+
+    /*
 
     fun searchRadiostation(query: String?): LiveData<List<Playlist>> {
         return mDatabase.playlistDao().searchAllProducts(query)
@@ -51,12 +51,12 @@ private var sInstance: DataRepository? = null
     }
 
     init {
-        mObservableProducts = MediatorLiveData()
-        mObservableProducts.addSource(
+        mObservableGenre = MediatorLiveData()
+        mObservableGenre.addSource(
             mDatabase.playlistDao().getAllPlaylist()
         ) { productEntities: List<Playlist> ->
             if (mDatabase.databaseCreated.value != null) {
-                mObservableProducts.postValue(productEntities)
+                mObservableGenre.postValue(productEntities)
             }
         }
     }

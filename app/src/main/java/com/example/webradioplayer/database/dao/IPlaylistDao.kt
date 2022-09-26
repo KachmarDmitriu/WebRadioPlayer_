@@ -13,6 +13,6 @@ interface IPlaylistDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertRadiostation(radiostation: Playlist)
 
-    @Query("select * from playlist_table where id_playlist = :radiostationId")
-    fun loadProduct(radiostationId: Int): LiveData<Playlist?>?
+    @Query("select * from playlist_table where id_genre_pls = :genreId")
+    fun loadPlaylist(genreId: Int): LiveData<Playlist>
 }

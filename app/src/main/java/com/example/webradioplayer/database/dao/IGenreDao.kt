@@ -16,5 +16,5 @@ public interface IGenreDao {
     fun insertGenre(genre: Genre)
 
     @Query("SELECT * FROM genre_table where id_genre = :genreId")
-    fun loadGenre(genreId: Int): LiveData<List<Genre?>?>?
+    fun loadGenre(genreId: Int): LiveData<Genre>
 }
