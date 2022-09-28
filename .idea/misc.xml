@@ -11,8 +11,11 @@
         <entry key="..\:/Users/tech/Desktop/WebRadioPlayer_/WebRadioPlayer_/app/src/main/res/layout/add_new_radio_activity.xml" value="0.33" />
         <entry key="..\:/Users/tech/Desktop/WebRadioPlayer_/WebRadioPlayer_/app/src/main/res/layout/add_new_radiostation_activity.xml" value="0.18489583333333334" />
         <entry key="..\:/Users/tech/Desktop/WebRadioPlayer_/WebRadioPlayer_/app/src/main/res/layout/list_note_radiostation.xml" value="0.14814814814814814" />
-        <entry key="..\:/Users/tech/Desktop/WebRadioPlayer_/WebRadioPlayer_/app/src/main/res/layout/player_activity.xml" value="0.1675925925925926" />
+        <entry key="..\:/Users/tech/Desktop/WebRadioPlayer_/WebRadioPlayer_/app/src/main/res/layout/player_activity.xml" value="0.25" />
+        <entry key="..\:/Users/tech/Desktop/WebRadioPlayer_/WebRadioPlayer_/app/src/main/res/layout/playlist_fragment.xml" value="0.18385416666666668" />
+        <entry key="..\:/Users/tech/Desktop/WebRadioPlayer_/WebRadioPlayer_/app/src/main/res/layout/playlist_item.xml" value="0.22" />
         <entry key="..\:/Users/tech/Desktop/WebRadioPlayer_/WebRadioPlayer_/app/src/main/res/layout/recyclerview_item.xml" value="0.18489583333333334" />
+        <entry key="..\:/Users/tech/Desktop/WebRadioPlayer_/WebRadioPlayer_/app/src/main/res/layout/select_genre_fragment.xml" value="0.33" />
         <entry key="..\:/Users/tech/StudioProjects/WebRadioPlayer_dev3/app/src/main/res/layout/list_note_radiostation.xml" value="0.18489583333333334" />
         <entry key="..\:/Users/tech/StudioProjects/WebRadioPlayer_dev3/app/src/main/res/layout/player_activity.xml" value="0.22" />
       </map>

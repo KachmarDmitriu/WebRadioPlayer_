@@ -12,7 +12,7 @@ import com.example.webradioplayer.PlayerService
 import com.example.webradioplayer.R
 import com.example.webradioplayer.WebRadioPlayerApplication
 import com.example.webradioplayer.databinding.PlayerActivityBinding
-import com.example.webradioplayer.model.PlaylistViewModel
+import com.example.webradioplayer.viewmodel.PlaylistViewModel
 import com.example.webradioplayer.model.PlaylistViewModelFactory
 import com.google.android.exoplayer2.MediaItem
 import androidx.activity.viewModels
@@ -102,7 +102,7 @@ class PlayerActivity : AppCompatActivity()
         // Add an observer on the LiveData returned by getAlphabetizedWords.
         // The onChanged() method fires when the observed data changes and the activity is
         // in the foreground.
-        playlistViewModel.allPlaylist.observe(owner = this, onChanged = fun(words: List<Playlist>) {
+        playlistViewModel.genreOnePlaylist.observe(owner = this, onChanged = fun(words: List<Playlist>) {
             // Update the cached copy of the words in the adapter.
             words.let { adapter.submitList(it) }
         })

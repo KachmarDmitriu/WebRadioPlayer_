@@ -25,11 +25,8 @@
     <string name="notification_channel">Now Playing</string>
     <string name="notification_channel_description">Shows what currently playing</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="hint_name">Enter radiostation name…</string>
-    <string name="hint_url">Enter URL radiostation…</string>
-    <string name="button_save">Save</string>
-    <string name="empty_not_saved">Word not saved because it is empty.</string>
-    <string name="add_word">Add word</string>
 
+
+    <string name="loading_playlist">Loading radiostatoin…</string>
+    <string name="loading_genres">Loading genres…</string>
 </resources>
