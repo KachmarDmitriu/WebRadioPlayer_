@@ -1,5 +1,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -21,19 +22,10 @@
         android:orientation="vertical">
 
         <include
-            layout="@layout/playlist_item"
-            app:product="@{playlist}"/>
+            layout="@layout/genre_item"
+            app:product="@{genre}"/>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/loading_comments_tv"
-                android:text="@string/loading_playlist"
-                app:visibleGone="@{isLoading}"/>
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -41,14 +33,15 @@
                 android:id="@+id/comments_list_wrapper">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/comment_list"
-                    android:contentDescription="@string/cd_comments_list"
+                    android:id="@+id/playlist_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layoutManager="LinearLayoutManager"
-                    app:visibleGone="@{!isLoading}"/>
+                    app:visibleGone="@{!isLoading}"
+                    tools:listitem="@layout/playlist_item"
+                />
             </FrameLayout>
-        </FrameLayout>
+
 
 
     </LinearLayout>

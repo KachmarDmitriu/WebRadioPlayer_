@@ -33,7 +33,7 @@ class PlaylistAdapter : ListAdapter<Playlist, PlaylistAdapter.PlaylistViewHolder
         companion object {
             fun create(parent: ViewGroup): PlaylistViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.recyclerview_item, parent, false)
+                    .inflate(R.layout.genre_item, parent, false)
                 return PlaylistViewHolder(view)
             }
         }
