@@ -23,7 +23,7 @@
 
         <include
             layout="@layout/genre_item"
-            app:product="@{genre}"/>
+            app:genre="@{genre}"/>
 
 
 
