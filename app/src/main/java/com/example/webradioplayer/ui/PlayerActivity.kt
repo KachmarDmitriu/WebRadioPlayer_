@@ -1,6 +1,5 @@
 package com.example.webradioplayer.ui
 
-import android.app.Activity
 import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
@@ -10,25 +9,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.webradioplayer.PlayerService
 import com.example.webradioplayer.R
-import com.example.webradioplayer.WebRadioPlayerApplication
+import com.example.webradioplayer.database.entity.Genre
 import com.example.webradioplayer.databinding.PlayerActivityBinding
-import com.example.webradioplayer.viewmodel.PlaylistViewModel
-import com.example.webradioplayer.model.PlaylistViewModelFactory
+import com.example.webradioplayer.model.IGenre
 import com.google.android.exoplayer2.MediaItem
-import androidx.activity.viewModels
-import androidx.lifecycle.observe
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.webradioplayer.database.entity.Playlist
 
 
 class PlayerActivity : AppCompatActivity()
 {
-    private val newWordActivityRequestCode = 1
+  /*  private val newWordActivityRequestCode = 1
 
     private val playlistViewModel: PlaylistViewModel by viewModels {
         PlaylistViewModelFactory((application as WebRadioPlayerApplication).repository)
     }
-
+*/
     private val viewBinding by lazy(LazyThreadSafetyMode.NONE) {
         PlayerActivityBinding.inflate(layoutInflater)
     }
@@ -50,6 +44,7 @@ class PlayerActivity : AppCompatActivity()
         override fun onServiceDisconnected(arg0: ComponentName) {
             mBound = false
         }
+
     }
 
 
@@ -61,13 +56,13 @@ class PlayerActivity : AppCompatActivity()
         setContentView(binding.root)
 
         setupListeners()
-        setupRecycler()
+        //setupRecycler()
 
-
+    }
         /*
         val database = WebPlayerDatabase.getDatabase(this)
 
-        //TODO видалити, лише для тестування БД
+        // видалити, лише для тестування БД
         GlobalScope.async {
             database.radiostationDao().insert(
                 ListRadiostation(
@@ -79,17 +74,18 @@ class PlayerActivity : AppCompatActivity()
         }
 */
 
-        }
+
 
 
     private fun setupListeners() {
         binding.buttonPlay.setOnClickListener { onPlay() }
         binding.buttonStop.setOnClickListener { onStopPlaying() }
-        binding.fab.setOnClickListener {
+    /*    binding.fab.setOnClickListener {
             val intent = Intent(this@PlayerActivity, AddNewRadioActivity::class.java)
-            startActivityForResult(intent, newWordActivityRequestCode) }
+            startActivityForResult(intent, newWordActivityRequestCode) }*/
     }
 
+/*
 
     private fun setupRecycler() {
 
@@ -108,8 +104,10 @@ class PlayerActivity : AppCompatActivity()
         })
 
     }
+*/
 
 
+/*
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
         super.onActivityResult(requestCode, resultCode, intentData)
@@ -128,6 +126,7 @@ class PlayerActivity : AppCompatActivity()
         }
     }
 
+*/
 
 
 
@@ -172,6 +171,19 @@ class PlayerActivity : AppCompatActivity()
         }
 
 
+    }
+
+
+    /** отображает жанр в фрагмент плейлиста ** наверное **  */
+    fun show(genre: IGenre) {
+        val playlistFragment: PlaylistFragment  = PlaylistFragment.forGenre(genre.id)// .getId())
+        supportFragmentManager
+            .beginTransaction()
+            .addToBackStack("product")
+            .replace(
+                R.id.fragment_container,
+                playlistFragment, null
+            ).commit()
     }
 
 }

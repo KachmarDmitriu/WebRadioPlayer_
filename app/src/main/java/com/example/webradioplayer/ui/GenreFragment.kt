@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.webradioplayer.R
 import com.example.webradioplayer.adapters.GenreAdapter
 import com.example.webradioplayer.databinding.GenreFragmentBinding
+import com.example.webradioplayer.ui.Callback.IGenreClickCallback
 
 class GenreFragment: Fragment() {
 
@@ -20,14 +21,18 @@ class GenreFragment: Fragment() {
         private var mGenreAdapter: GenreAdapter? = null
         private var mBinding: GenreFragmentBinding? = null
 
+    private val binding get() = requireNotNull(mBinding)  // ?? что делает?? из проекта Артура
+
         override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
+            inflater: LayoutInflater,
+            container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View? {
             mBinding = DataBindingUtil.inflate(inflater, R.layout.genre_fragment, container, false)
-            mGenreAdapter = GenreAdapter(mProductClickCallback)
-            mBinding.genreList.adapter productsList.setAdapter(mGenreAdapter)
-            return mBinding.getRoot()
+            mGenreAdapter = GenreAdapter(mGenreClickCallback)
+
+            binding.genreList.adapter =  mGenreAdapter
+            return binding.root
         }
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,12 +69,12 @@ class GenreFragment: Fragment() {
             super.onDestroyView()
         }
 
-        private val mProductClickCallback: ProductClickCallback =
-            ProductClickCallback { product ->
+        private val mGenreClickCallback: IGenreClickCallback =
+            IGenreClickCallback { genre ->
                 if (lifecycle.currentState
                         .isAtLeast(Lifecycle.State.STARTED)
                 ) {
-                    (requireActivity() as MainActivity).show(product)
+                    (requireActivity() as PlayerActivity).show(genre)
                 }
             }
 
