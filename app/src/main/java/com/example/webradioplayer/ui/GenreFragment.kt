@@ -52,11 +52,11 @@ class GenreFragment: Fragment() {
         setupRecycler()
         observeUiState()
 
-        viewModel.loadCountries()
+        viewModel.loadGenres()
     }
 
     private fun setupRefresh() {
-        binding.swipeRefresh.setOnRefreshListener {
+        binding.genreListLayout.setOnClickListener {
             viewModel.loadCountries(true)
         }
     }
