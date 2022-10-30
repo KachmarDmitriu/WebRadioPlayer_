@@ -12,7 +12,7 @@
            type="boolean" />
 
        <variable
-           name="productViewModel"
+           name="genreViewModel"
            type="com.example.webradioplayer.viewmodel.GenreViewModel"/>
 </data>
 
@@ -27,7 +27,7 @@
 
 
        <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/genre_list"
+        android:id="@+id/recycler_genre_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"

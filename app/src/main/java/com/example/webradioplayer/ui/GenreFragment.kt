@@ -17,6 +17,7 @@ import com.example.webradioplayer.database.entity.Genre
 import com.example.webradioplayer.databinding.GenreFragmentBinding
 import com.example.webradioplayer.ui.Callback.IGenreClickCallback
 import com.example.webradioplayer.viewmodel.GenreViewModel
+import com.xwray.groupie.GroupieAdapter
 
 
 class GenreFragment: Fragment() {
@@ -41,7 +42,14 @@ class GenreFragment: Fragment() {
             return binding.root
         }
 
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
+
+    private val genresAdapter by lazy {
+        return@lazy GroupieAdapter()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
             init()
         }
@@ -52,17 +60,17 @@ class GenreFragment: Fragment() {
         setupRecycler()
         observeUiState()
 
-        viewModel.loadGenres()
+        viewModel.loadGenre()
     }
 
     private fun setupRefresh() {
         binding.genreListLayout.setOnClickListener {
-            viewModel.loadCountries(true)
+            viewModel.loadGenre()
         }
     }
 
     private fun setupRecycler() {
-        binding.recyclerCountries.adapter = countriesAdapter
+        binding.recyclerGenreList.adapter = genresAdapter  //recyclerCountries.adapter = countriesAdapter
     }
 
     private fun observeUiState() {

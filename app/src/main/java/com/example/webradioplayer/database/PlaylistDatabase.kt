@@ -12,10 +12,10 @@ import com.example.webradioplayer.database.entity.Genre
 import com.example.webradioplayer.database.entity.Playlist
 import kotlinx.coroutines.CoroutineScope
 
-@Database(entities = [Playlist::class, Genre::class], version = 2)
+@Database(entities = [Playlist::class, Genre::class], version = 2)  //использование классов описывающих таблицы
 
 abstract class PlaylistDatabase : RoomDatabase() {
-    abstract fun playlistDao(): IPlaylistDao
+    abstract fun playlistDao(): IPlaylistDao        //декларация классов для доступа к таблице наследующих интерфейс с описанием запросов к БД
     abstract fun genreDao(): IGenreDao
 
 

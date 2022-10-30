@@ -7,7 +7,21 @@ import kotlinx.coroutines.launch
 
 class PlaylistViewModel(private val repository: DataRepository): ViewModel() {
 
-     fun insert(playlist: Playlist) = viewModelScope.launch {
+    fun loadPLaylist(): LiveData<List<Playlist>>
+    {
+            return repository.loadPlaylist()
+    }
+
+
+        // Для работы реализовать передачу  ИД жанра выбора
+    //fun loadPLaylist(genreId: Int): LiveData<List<Playlist>> {
+    //    return repository.loadPlaylist(genreId)
+    //}
+
+
+
+
+    fun insert(playlist: Playlist) = viewModelScope.launch {
         repository.addRadiostation(playlist)
     }
 
