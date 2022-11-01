@@ -2,11 +2,13 @@ package com.example.webradioplayer.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.webradioplayer.DataRepository
 import com.example.webradioplayer.database.PlaylistDatabase
 import com.example.webradioplayer.database.entity.Genre
 import com.example.webradioplayer.database.entity.Playlist
+import com.example.webradioplayer.ui.GenresUiState
 
 class GenreViewModel(private val repository: DataRepository): ViewModel() {
 //class DataRepository private constructor(private val mDatabase: PlaylistDatabase){
@@ -23,6 +25,9 @@ class GenreViewModel(private val repository: DataRepository): ViewModel() {
        }
    }
 */
+
+   private val _state: MutableLiveData<GenresUiState> = MutableLiveData()
+   val state: LiveData<GenresUiState> = _state
 
 
 
