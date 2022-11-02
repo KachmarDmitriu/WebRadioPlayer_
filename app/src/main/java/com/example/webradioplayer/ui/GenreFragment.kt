@@ -37,11 +37,11 @@ class GenreFragment: Fragment() {
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-        ): View? {
-            mBinding = DataBindingUtil.inflate(inflater, R.layout.genre_fragment, container, false)
-            mGenreAdapter = GenreAdapter(mGenreClickCallback)
+        ): View {
+            mBinding = GenreFragmentBinding.inflate(inflater, container, false)// DataBindingUtil.inflate(inflater, R.layout.genre_fragment, container, false)
+            // mGenreAdapter = GenreAdapter(mGenreClickCallback)
 
-            binding.genreList.adapter =  mGenreAdapter
+            //binding.genreList.adapter =  mGenreAdapter
             return binding.root
         }
 
@@ -91,7 +91,7 @@ class GenreFragment: Fragment() {
         when (state) {
             is GenresLoadError -> onError(state.message)
             is GenresLoaded -> onGenresLoaded(state.data)
-            is GenresLoading -> binding.swipeRefresh.isRefreshing = state.isLoading
+              is GenresLoading -> binding.swipeRefresh.isRefreshing = state.isLoading
         }
     }
 
