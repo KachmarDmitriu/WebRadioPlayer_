@@ -3,7 +3,6 @@ package com.example.webradioplayer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.example.webradioplayer.database.PlaylistDatabase
-import com.example.webradioplayer.database.dao.IGenreDao
 import com.example.webradioplayer.database.entity.Genre
 import com.example.webradioplayer.database.entity.Playlist
 
@@ -12,10 +11,7 @@ class DataRepository private constructor(private var mDatabase: PlaylistDatabase
 
     private val mObservableGenre: LiveData<List<Genre>>
 
-   // val getGenre: LiveData<List<Genre>>
-   //     get() = mObservableGenre          //для строки поиска
-
-    //получение всей таблицы Genre
+     //получение всей таблицы Genre
     fun loadGenre(): LiveData<List<Genre>> {
         return mDatabase.genreDao().getGenres()
     }
@@ -28,7 +24,6 @@ class DataRepository private constructor(private var mDatabase: PlaylistDatabase
 
 
 
-
     suspend fun addGenre(genre: Genre)
     {
         mDatabase.genreDao().insertGenre(genre)
@@ -38,13 +33,6 @@ class DataRepository private constructor(private var mDatabase: PlaylistDatabase
     {
         mDatabase.playlistDao().insertRadiostation(radiostation)
     }
-    /*
-
-    fun searchRadiostation(query: String?): LiveData<List<Playlist>> {
-        return mDatabase.playlistDao().searchAllProducts(query)
-    }
-*/
-
 
 
 

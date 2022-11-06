@@ -9,7 +9,6 @@ import timber.log.Timber
 class WebRadioPlayerApplication : Application() {
     val applicationScope = CoroutineScope(SupervisorJob())
     val database by lazy { PlaylistDatabase.getDatabase(this, applicationScope) }
-    //val repository by lazy { DataRepository(database.playlistDao()) }
 
     override fun onCreate() {
         super.onCreate()

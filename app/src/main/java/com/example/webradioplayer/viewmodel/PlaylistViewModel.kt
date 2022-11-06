@@ -10,18 +10,15 @@ import kotlinx.coroutines.launch
 
 class PlaylistViewModel(private val repository: DataRepository): ViewModel() {
 
-    fun loadPLaylist(): LiveData<List<Playlist>>
-    {
-            return repository.loadPlaylist()
+    fun loadPLaylist(): LiveData<List<Playlist>> {
+        return repository.loadPlaylist()
     }
 
 
-        // Для работы реализовать передачу  ИД жанра выбора
+    // Для работы реализовать передачу  ИД жанра выбора
     //fun loadPLaylist(genreId: Int): LiveData<List<Playlist>> {
     //    return repository.loadPlaylist(genreId)
     //}
-
-
 
 
     fun insert(playlist: Playlist) = viewModelScope.launch {
@@ -29,26 +26,12 @@ class PlaylistViewModel(private val repository: DataRepository): ViewModel() {
     }
 
 
-
     private val _state: MutableLiveData<GenresUiState> = MutableLiveData()
     val state: LiveData<GenresUiState> = _state
 
     fun selectCountry(genre: IGenre) {
-        _state.value =  GenreSelected(genre)
+        _state.value = GenreSelected(genre)
     }
-
 
 
 }
-
-
-/*
-class PlaylistViewModelFactory(private val repository: DataRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(PlaylistViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return PlaylistViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}*/

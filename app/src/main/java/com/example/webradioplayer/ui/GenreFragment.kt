@@ -5,14 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.fragment.app.viewModels
-import com.example.webradioplayer.R
-import com.example.webradioplayer.adapters.GenreAdapter
-import com.example.webradioplayer.database.entity.Genre
 import com.example.webradioplayer.databinding.GenreFragmentBinding
 import com.example.webradioplayer.model.IGenre
 import com.example.webradioplayer.ui.Callback.IGenreClickCallback
@@ -25,9 +21,7 @@ import timber.log.Timber            //логер
 
 class GenreFragment: Fragment() {
 
-  //  class ProductListFragment : Fragment() {
-        private var mGenreAdapter: GenreAdapter? = null
-        private var mBinding: GenreFragmentBinding? = null
+       private var mBinding: GenreFragmentBinding? = null
 
        private val binding get() = requireNotNull(mBinding)
 
@@ -38,17 +32,15 @@ class GenreFragment: Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View {
-            mBinding = GenreFragmentBinding.inflate(inflater, container, false)// DataBindingUtil.inflate(inflater, R.layout.genre_fragment, container, false)
-            // mGenreAdapter = GenreAdapter(mGenreClickCallback)
+            mBinding = GenreFragmentBinding.inflate(inflater, container, false)
 
-            //binding.genreList.adapter =  mGenreAdapter
             return binding.root
         }
 
     override fun onDestroyView() {
         mBinding = null
-        mGenreAdapter = null
         super.onDestroyView()
+
     }
 
 
@@ -112,37 +104,6 @@ class GenreFragment: Fragment() {
         playlistGenresViewModel      countryDetailsViewModel.selectCountry(country)
                                         //открытие фрагмента плейлиста по тыку на конкретном жанре
     }
-
-
-    /*  для поиска в списке, пока не используется,
-    val viewModel: ProductListViewModel =
-        ViewModelProvider(this).get(ProductListViewModel::class.java)
-    mBinding.productsSearchBtn.setOnClickListener { v ->
-        val query: Editable = mBinding.productsSearchBox.getText()
-        viewModel.setQuery(query)
-    }
-    subscribeUi(viewModel.getProducts())
-}
-
-private fun subscribeUi(liveData: LiveData<List<Genre>>) {
-    // Update the list when the data changes
-    liveData.observe(
-        viewLifecycleOwner
-    ) { myGenre: List<Genre>? ->
-        if (myGenre != null) {
-            mBinding.setIsLoading(false)
-            mGenreAdapter.setProductList(myGenre)
-        } else {
-            mBinding.setIsLoading(true)
-        }
-        // espresso does not know how to wait for data binding's loop so we execute changes
-        // sync.
-        mBinding.executePendingBindings()
-    }
-}
-*/
-
-
 
 
         private val mGenreClickCallback: IGenreClickCallback =
