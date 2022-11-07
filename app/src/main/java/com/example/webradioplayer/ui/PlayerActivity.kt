@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.webradioplayer.PlayerService
 import com.example.webradioplayer.R
-import com.example.webradioplayer.database.entity.Genre
 import com.example.webradioplayer.databinding.PlayerActivityBinding
 import com.example.webradioplayer.model.IGenre
 import com.google.android.exoplayer2.MediaItem
@@ -176,13 +175,13 @@ class PlayerActivity : AppCompatActivity()
 
     /** отображает жанр в фрагмент плейлиста ** наверное **  */
     fun show(genre: IGenre) {
-        val playlistFragment: PlaylistFragment  = PlaylistFragment.forGenre(genre.id)// .getId())
+        val genreFragment = GenreFragment.forGenre(genre.id)// .getId())
         supportFragmentManager
             .beginTransaction()
             .addToBackStack("product")
             .replace(
                 R.id.fragment_container,
-                playlistFragment, null
+                genreFragment, null
             ).commit()
     }
 

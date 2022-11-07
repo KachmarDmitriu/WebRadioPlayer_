@@ -29,7 +29,7 @@ class PlaylistViewModel(private val repository: DataRepository): ViewModel() {
     private val _state: MutableLiveData<GenresUiState> = MutableLiveData()
     val state: LiveData<GenresUiState> = _state
 
-    fun selectCountry(genre: IGenre) {
+    fun selectGenre(genre: IGenre) {
         _state.value = GenreSelected(genre)
     }
 
