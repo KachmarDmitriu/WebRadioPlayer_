@@ -14,22 +14,9 @@ class GenreViewModel(private val repository: DataRepository): ViewModel() {
    private val _state: MutableLiveData<GenresUiState> = MutableLiveData()
    val state: LiveData<GenresUiState> = _state
 
-
-
    fun loadGenre(): LiveData<List<Genre>> {
        //return mDatabase.genreDao().loadGenre(genreId)  //возврат значения по определенному жанру
        return repository.loadGenre()   //возврат всей таблицы *жанр*
    }
-
-
-   private val mObservableGenre: LiveData<Genre>? = null
-
-   private val mGenreId = 0
-
-   private val mObservablePlaylist: LiveData<List<Playlist>>? = null
-
-   private var mProductId = 0
-
-   private var mRepository: DataRepository? = null
 
 }

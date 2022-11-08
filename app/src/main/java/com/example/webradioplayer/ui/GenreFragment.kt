@@ -94,7 +94,7 @@ class GenreFragment: Fragment() {
     private fun onGenresLoaded(genres: List<IGenre>) {
         genresAdapter.replaceAll(
             genres.map { genre ->
-                GenreItem(genre, ::onGenreClick)        //реализовать  GenreItem (там просто скопировано CountyItem)
+                GenreItem(genre, ::onGenreClick)
             }
         )
     }
@@ -102,7 +102,7 @@ class GenreFragment: Fragment() {
 
     private fun onGenreClick(genre: IGenre) {
         playlistGenresViewModel.selectGenre(genre)
-        //открытие фрагмента плейлиста по тыку на конкретном жанре   ////  Х.З. - работает или нет
+        //открытие фрагмента плейлиста по тыку на конкретном жанре
     }
 
 
