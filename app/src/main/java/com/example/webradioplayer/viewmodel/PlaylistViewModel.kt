@@ -10,28 +10,21 @@ import kotlinx.coroutines.launch
 
 class PlaylistViewModel(private val repository: DataRepository): ViewModel() {
 
-    fun loadPLaylist(): LiveData<List<Playlist>> {
-        return repository.loadPlaylist()
-    }
-
-
-    // Для работы реализовать передачу  ИД жанра выбора
-    //fun loadPLaylist(genreId: Int): LiveData<List<Playlist>> {
-    //    return repository.loadPlaylist(genreId)
-    //}
-
-
-    fun insert(playlist: Playlist) = viewModelScope.launch {
-        repository.addRadiostation(playlist)
-    }
-
-
     private val _state: MutableLiveData<GenresUiState> = MutableLiveData()
     val state: LiveData<GenresUiState> = _state
 
     fun selectGenre(genre: IGenre) {
         _state.value = GenreSelected(genre)
     }
+
+// Для работы реализовать передачу  ИД жанра выбора
+    fun loadPLaylist(genreId: Int): LiveData<List<Playlist>> {
+        return repository.loadGenrePlaylist(genreId)
+    }
+
+fun insert(playlist: Playlist) = viewModelScope.launch {
+    repository.addRadiostation(playlist)
+}
 
 
 }

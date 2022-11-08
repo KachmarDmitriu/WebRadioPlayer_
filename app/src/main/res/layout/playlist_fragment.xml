@@ -19,7 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/cardview_light_background"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/playlistList_layout">
 
         <include
             layout="@layout/genre_item"
@@ -32,14 +33,21 @@
                 android:layout_height="match_parent"
                 android:id="@+id/comments_list_wrapper">
 
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/swipe_refresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/playlist_list"
+                    android:id="@+id/recycler_playlist_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layoutManager="LinearLayoutManager"
                     app:visibleGone="@{!isLoading}"
                     tools:listitem="@layout/playlist_item"
                 />
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
             </FrameLayout>
 
 

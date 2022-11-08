@@ -17,12 +17,14 @@ class DataRepository private constructor(private var mDatabase: PlaylistDatabase
     }
 
     //получение всей таблицы Playlist  \пока для теста, вся таблица\
-    // fun loadPlaylist(genreId: Int): LiveData<List<Playlist>> {   использовать в рабочем приложении, с передачей ИД жанра
     fun loadPlaylist(): LiveData<List<Playlist>> {
-        return mDatabase.playlistDao().getAllPlaylist()  //loadPlaylist(genreId) - по жанру, в рабочее приложение
+        return mDatabase.playlistDao().getAllPlaylist()
     }
 
-
+    //с передачей ИД жанра
+    fun loadGenrePlaylist(genreId: Int): LiveData<List<Playlist>> {
+        return mDatabase.playlistDao().loadPlaylist(genreId) //- по жанру, в рабочее приложение
+    }
 
     suspend fun addGenre(genre: Genre)
     {
