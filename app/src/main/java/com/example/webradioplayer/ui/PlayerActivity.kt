@@ -16,12 +16,7 @@ import com.google.android.exoplayer2.MediaItem
 
 class PlayerActivity : AppCompatActivity()
 {
-  /*  private val newWordActivityRequestCode = 1
 
-    private val playlistViewModel: PlaylistViewModel by viewModels {
-        PlaylistViewModelFactory((application as WebRadioPlayerApplication).repository)
-    }
-*/
     private val viewBinding by lazy(LazyThreadSafetyMode.NONE) {
         PlayerActivityBinding.inflate(layoutInflater)
     }
@@ -58,77 +53,14 @@ class PlayerActivity : AppCompatActivity()
         //setupRecycler()
 
     }
-        /*
-        val database = WebPlayerDatabase.getDatabase(this)
-
-        // видалити, лише для тестування БД
-        GlobalScope.async {
-            database.radiostationDao().insert(
-                ListRadiostation(
-                    nameRadiostation = "test name",
-                    genre = "test genre",
-                    urlRadiostation = ""
-                )
-            )
-        }
-*/
-
 
 
 
     private fun setupListeners() {
         binding.buttonPlay.setOnClickListener { onPlay() }
         binding.buttonStop.setOnClickListener { onStopPlaying() }
-    /*    binding.fab.setOnClickListener {
-            val intent = Intent(this@PlayerActivity, AddNewRadioActivity::class.java)
-            startActivityForResult(intent, newWordActivityRequestCode) }*/
-    }
-
-/*
-
-    private fun setupRecycler() {
-
-       //  binding.recyclerview.adapter = CustomAdaper(listOf())
-       // val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = PlaylistAdapter()
-        binding.recyclerview.adapter = PlaylistAdapter()
-        binding.recyclerview.layoutManager = LinearLayoutManager(this)
-
-        // Add an observer on the LiveData returned by getAlphabetizedWords.
-        // The onChanged() method fires when the observed data changes and the activity is
-        // in the foreground.
-        playlistViewModel.genreOnePlaylist.observe(owner = this, onChanged = fun(words: List<Playlist>) {
-            // Update the cached copy of the words in the adapter.
-            words.let { adapter.submitList(it) }
-        })
 
     }
-*/
-
-
-/*
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intentData)
-
-        if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
-            intentData?.getStringExtra(AddNewRadioActivity.EXTRA_REPLY)?.let { reply ->
-                val playlist = Playlist(reply)              //как правильно отобразить два поля
-                playlistViewModel.insert(playlist)
-            }
-        } else {
-            Toast.makeText(
-                applicationContext,
-                R.string.empty_not_saved,
-                Toast.LENGTH_LONG
-            ).show()
-        }
-    }
-
-*/
-
-
-
 
     public override fun onStart() {
             super.onStart()
@@ -170,19 +102,6 @@ class PlayerActivity : AppCompatActivity()
         }
 
 
-    }
-
-
-    /** отображает жанр в фрагмент плейлиста ** наверное **  */
-    fun show(genre: IGenre) {
-        val genreFragment = GenreFragment.forGenre(genre.id)// .getId())
-        supportFragmentManager
-            .beginTransaction()
-            .addToBackStack("product")
-            .replace(
-                R.id.fragment_container,
-                genreFragment, null
-            ).commit()
     }
 
 }

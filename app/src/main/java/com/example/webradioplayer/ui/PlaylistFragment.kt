@@ -44,7 +44,7 @@ class PlaylistFragment : Fragment() {
 
 
     private val viewModel by viewModels<PlaylistViewModel>()
-    private val playlistGenresViewModel by activityViewModels<PlaylistViewModel>()
+
 
     private val playlistAdapter by lazy {
         return@lazy GroupieAdapter()
@@ -80,9 +80,7 @@ class PlaylistFragment : Fragment() {
 
     private fun ErrLoadPlsUiState(state: PlaylistUiState) {
         when (state) {
-            is PlaylistLoadError -> onError(state.message)
-            is PlaylistLoaded -> onPLaylistLoaded(state.data)
-            is PlaylistLoading -> binding.swipeRefresh.isRefreshing = state.isLoading
+            is GenreSelected -> binding. .country = state.country
         }
     }
 
@@ -104,28 +102,6 @@ class PlaylistFragment : Fragment() {
        // playlistGenresViewModel.selectGenre(genre)
 
         //Вставить получение ссылки радиостанции и переклбючение на нее радио.
-    }
-
-
-
-
-
-
-
-
-
-    /** Creates product fragment for specific product ID  */
-    companion object {
-        private const val KEY_GENRE_ID = "genre_id"
-
-        /** Creates product fragment for specific product ID  */
-        fun forGenre(genreId: Int): PlaylistFragment {
-            val fragment = PlaylistFragment()
-            val args = Bundle()
-            args.putInt(KEY_GENRE_ID, genreId)
-            fragment.arguments = args
-            return fragment
-        }
     }
 
 

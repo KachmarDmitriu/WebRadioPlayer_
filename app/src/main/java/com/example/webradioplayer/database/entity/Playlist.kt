@@ -38,42 +38,6 @@ class Playlist : IPlaylist {
         get() = url_radiostation
         set(value) {this.urlRadiostation = value}
 
-    /*@Override
-    fun getidPlaylist(): Int {
-        return id_playlist
-    }
-
-    fun setidPlaylist(id: Int) {
-        this.idPlaylist = id_playlist
-    }
-
-    @Override
-    fun getidGenre(): Int {
-        return id_genre_pls
-    }
-
-    fun setidGenre(productId: Int) {
-        this.idGenre = id_genre_pls
-    }
-
-    @Override
-    fun getnameRadiostation(): String {
-        return name_radiostation!!
-    }
-
-    fun setnameRadiostation(name_radiostation: String?) {
-        this.nameRadiostation = name_radiostation
-    }
-
-    @Override
-    fun geturlRadiostation(): String {
-        return url_radiostation!!
-    }
-
-    fun seturlRadiostation(name_radiostation: String?) {
-        this.urlRadiostation = url_radiostation
-    }
-*/
     constructor() {}
 
     @Ignore

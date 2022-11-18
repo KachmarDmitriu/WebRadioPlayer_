@@ -15,7 +15,4 @@ public interface IGenreDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertGenre(genre: Genre)
 
-  //  что долженвыводить ????  возможно,- во фрагменте  плейлиста выбранного жанра, выводит название текущего жанра
-//  @Query("SELECT * FROM genre_table where id_genre = :genreId")
-  //  fun loadGenre(genreId: Int): LiveData<Genre>
 }
