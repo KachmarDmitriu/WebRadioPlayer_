@@ -1,6 +1,7 @@
 package com.example.webradioplayer.ui
 
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
@@ -10,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.webradioplayer.PlayerService
 import com.example.webradioplayer.R
 import com.example.webradioplayer.databinding.PlayerActivityBinding
-import com.example.webradioplayer.model.IGenre
 import com.google.android.exoplayer2.MediaItem
+import kotlinx.coroutines.*
 
 
 class PlayerActivity : AppCompatActivity()
@@ -50,7 +51,21 @@ class PlayerActivity : AppCompatActivity()
         setContentView(binding.root)
 
         setupListeners()
-        //setupRecycler()
+        setupRecycler()
+
+
+
+        // Add product list fragment if this is first creation
+        val currentFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_container)
+        if (currentFragment == null) {
+            val fragment = GenreFragment()
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.fragment_container, fragment)
+                .commit()
+        }
+
 
     }
 
@@ -59,6 +74,12 @@ class PlayerActivity : AppCompatActivity()
     private fun setupListeners() {
         binding.buttonPlay.setOnClickListener { onPlay() }
         binding.buttonStop.setOnClickListener { onStopPlaying() }
+    }
+
+
+   private fun setupRecycler() {
+
+     //   binding.recyclerView.adapter = CustomAdaper(listOf())
 
     }
 
@@ -67,7 +88,7 @@ class PlayerActivity : AppCompatActivity()
 
             // Bind to LocalService
             Intent(this, PlayerService::class.java).also { intent ->
-                bindService(intent, connection, BIND_AUTO_CREATE)
+                bindService(intent, connection, Context.BIND_AUTO_CREATE)
             }
         }
 

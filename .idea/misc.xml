@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android_Project/WebRadioPlayer_/app/src/main/res/layout/add_new_radio_activity.xml" value="0.17916666666666667" />
+        <entry key="..\:/Android_Project/WebRadioPlayer_/app/src/main/res/layout/genre_fragment.xml" value="0.264" />
+        <entry key="..\:/Android_Project/WebRadioPlayer_/app/src/main/res/layout/genre_item.xml" value="0.17916666666666667" />
+        <entry key="..\:/Android_Project/WebRadioPlayer_/app/src/main/res/layout/player_activity.xml" value="0.264" />
+        <entry key="..\:/Android_Project/WebRadioPlayer_/app/src/main/res/layout/playlist_fragment.xml" value="0.264" />
+        <entry key="..\:/Android_Project/WebRadioPlayer_/app/src/main/res/layout/playlist_item.xml" value="0.1484375" />
         <entry key="..\:/Users/DM/StudioProjects/WebRadioPlayer_/app/src/main/res/layout/list_note_radiostation.xml" value="0.313585291113381" />
         <entry key="..\:/Users/DM/StudioProjects/WebRadioPlayer_/app/src/main/res/layout/note_item.xml" value="0.31979166666666664" />
         <entry key="..\:/Users/DM/StudioProjects/WebRadioPlayer_/app/src/main/res/layout/player_activity.xml" value="0.1828125" />

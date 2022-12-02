@@ -18,6 +18,7 @@ class Playlist : IPlaylist {
 
     @PrimaryKey    (autoGenerate = true)
     var id_playlist = 0
+   // var id_playlist: UUID = UUID.randomUUID()           потом попробовать с автогенерацией поля
     var id_genre_pls = 0
     var name_radiostation: String? = null
     var url_radiostation: String? = null

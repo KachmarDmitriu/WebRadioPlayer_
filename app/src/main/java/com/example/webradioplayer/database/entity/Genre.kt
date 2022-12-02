@@ -11,6 +11,7 @@ class Genre : IGenre {
 
         @PrimaryKey
         var id_genre = 0
+      //  var id_genre: UUID = UUID.randomUUID()     потом попробовать с автогенерацией поля
         var genre_name : String? = null
 
     override var id: Int

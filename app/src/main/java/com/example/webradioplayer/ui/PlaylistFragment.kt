@@ -6,13 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.webradioplayer.databinding.PlaylistFragmentBinding
-import com.example.webradioplayer.model.IGenre
 import com.example.webradioplayer.model.IPlaylist
-import com.example.webradioplayer.ui.List.GenreItem
-import com.example.webradioplayer.ui.List.PlaylistItem
 import com.example.webradioplayer.viewmodel.PlaylistViewModel
 import com.xwray.groupie.GroupieAdapter
 import timber.log.Timber
@@ -74,13 +70,13 @@ class PlaylistFragment : Fragment() {
         binding.recyclerPlaylistList.adapter = playlistAdapter
     }
 
-    private fun observeUiState() {
-        viewModel.state.observe(viewLifecycleOwner, ::ErrLoadPlsUiState)
+   private fun observeUiState() {
+     //   viewModel.state.observe(viewLifecycleOwner, ::ErrLoadPlsUiState)
     }
 
     private fun ErrLoadPlsUiState(state: PlaylistUiState) {
         when (state) {
-            is GenreSelected -> binding. .country = state.country
+          //  is GenreSelected -> binding.country = state.country
         }
     }
 
@@ -90,11 +86,11 @@ class PlaylistFragment : Fragment() {
     }
 
     private fun onPLaylistLoaded(playlist: List<IPlaylist>) {
-        playlistAdapter.replaceAll(
+     /*   playlistAdapter.replaceAll(
             playlist.map { pls ->
                 PlaylistItem(pls, ::onPlaylistClick)
             }
-        )
+        )*/
     }
 
 

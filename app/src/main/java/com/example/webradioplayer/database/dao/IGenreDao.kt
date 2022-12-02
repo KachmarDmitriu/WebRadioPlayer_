@@ -1,12 +1,14 @@
 package com.example.webradioplayer.database.dao
 
 import androidx.lifecycle.LiveData
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.webradioplayer.database.entity.Genre
 import com.example.webradioplayer.database.entity.Playlist
 
+@Dao
 public interface IGenreDao {
 
     @Query("SELECT * FROM genre_table ORDER BY genre_name")

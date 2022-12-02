@@ -8,6 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.webradioplayer.R
 import com.example.webradioplayer.databinding.GenreFragmentBinding
 import com.example.webradioplayer.model.IGenre
 import com.example.webradioplayer.ui.List.GenreItem
@@ -18,6 +21,8 @@ import timber.log.Timber
 
 class GenreFragment: Fragment() {
 
+    private lateinit var genreRecyclerView: RecyclerView
+
        private var mBinding: GenreFragmentBinding? = null
 
        private val binding get() = requireNotNull(mBinding)
@@ -27,9 +32,13 @@ class GenreFragment: Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View {
-            mBinding = GenreFragmentBinding.inflate(inflater, container, false)
-
-            return binding.root
+            val view = inflater.inflate(R.layout.genre_fragment, container, false)
+            //mBinding = GenreFragmentBinding.inflate(inflater, container, false)
+            genreRecyclerView =
+                view.findViewById(R.id.recycler_genre_list) as RecyclerView
+            genreRecyclerView.layoutManager = LinearLayoutManager(context)
+            //return binding.root
+            return view
         }
 
     override fun onDestroyView() {
