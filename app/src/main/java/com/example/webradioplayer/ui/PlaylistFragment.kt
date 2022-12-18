@@ -55,7 +55,7 @@ class PlaylistFragment : Fragment() {
     private fun init() {
         setupRefresh()
         setupRecycler()
-        observeUiState()
+     //   observeUiState()
 
 
     }
@@ -69,7 +69,8 @@ class PlaylistFragment : Fragment() {
     private fun setupRecycler() {
         binding.recyclerPlaylistList.adapter = playlistAdapter
     }
-
+/*
+ //что-то связаннное с обработкто ошибок,  пока ненадо
    private fun observeUiState() {
      //   viewModel.state.observe(viewLifecycleOwner, ::ErrLoadPlsUiState)
     }
@@ -79,6 +80,7 @@ class PlaylistFragment : Fragment() {
           //  is GenreSelected -> binding.country = state.country
         }
     }
+*/
 
     private fun onError(message: String?) {
         Timber.e(message)

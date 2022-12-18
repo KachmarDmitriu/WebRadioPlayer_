@@ -33,11 +33,13 @@ class GenreFragment: Fragment() {
             savedInstanceState: Bundle?
         ): View {
             val view = inflater.inflate(R.layout.genre_fragment, container, false)
-            //mBinding = GenreFragmentBinding.inflate(inflater, container, false)
+                  //mBinding = GenreFragmentBinding.inflate(inflater, container, false)
+
             genreRecyclerView =
-                view.findViewById(R.id.recycler_genre_list) as RecyclerView
-            genreRecyclerView.layoutManager = LinearLayoutManager(context)
-            //return binding.root
+                view.findViewById(R.id.recycler_genre_list) as RecyclerView     //подключение рециклера к фрагменту
+            //genreRecyclerView.layoutManager = LinearLayoutManager(context)
+
+                    //return binding.root
             return view
         }
 
@@ -64,7 +66,7 @@ class GenreFragment: Fragment() {
     private fun init() {
         setupRefresh()
         setupRecycler()
-        observeUiState()
+      //  observeUiState()
 
         viewModel.loadGenre()
     }
@@ -78,7 +80,8 @@ class GenreFragment: Fragment() {
     private fun setupRecycler() {
         binding.recyclerGenreList.adapter = genresAdapter  //recyclerCountries.adapter = countriesAdapter
     }
-
+/*
+            //что-то связаннное с обработкто ошибок,  пока ненадо
     private fun observeUiState() {
         viewModel.state.observe(viewLifecycleOwner, ::ErrLoadUiState)
     }
@@ -91,6 +94,7 @@ class GenreFragment: Fragment() {
         }
     }
 
+*/
     private fun onError(message: String?) {
         Timber.e(message)
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()

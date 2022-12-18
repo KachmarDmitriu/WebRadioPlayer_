@@ -54,6 +54,7 @@ class PlayerActivity : AppCompatActivity()
         setupRecycler()
 
 
+/*
 
         // Add product list fragment if this is first creation
         val currentFragment =
@@ -65,6 +66,7 @@ class PlayerActivity : AppCompatActivity()
                 .add(R.id.fragment_container, fragment)
                 .commit()
         }
+*/
 
 
     }
