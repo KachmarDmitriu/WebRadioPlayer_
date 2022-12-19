@@ -12,7 +12,6 @@ import com.example.webradioplayer.PlayerService
 import com.example.webradioplayer.R
 import com.example.webradioplayer.databinding.PlayerActivityBinding
 import com.google.android.exoplayer2.MediaItem
-import kotlinx.coroutines.*
 
 
 class PlayerActivity : AppCompatActivity()

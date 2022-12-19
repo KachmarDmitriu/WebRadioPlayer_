@@ -11,11 +11,8 @@ import com.example.webradioplayer.database.dao.IPlaylistDao
 import com.example.webradioplayer.database.entity.Genre
 import com.example.webradioplayer.database.entity.Playlist
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.internal.synchronized
-import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.InternalCoroutinesApi
-import java.util.concurrent.Executors
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.internal.synchronized
 
 @Database(entities = [Playlist::class, Genre::class], version = 2)  //использование классов описывающих таблицы
 
