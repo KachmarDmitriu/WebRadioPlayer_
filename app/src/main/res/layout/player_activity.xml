@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+ <androidx.fragment.app.FragmentContainerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+              />
+
+<!--
 
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -9,6 +17,7 @@
     android:layout_alignParentBottom="true"
 
     tools:context=".ui.PlayerActivity">
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -21,14 +30,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent">
 
-       <!-- <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="104dp"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout" />
--->
+
     </LinearLayout>
 
 
@@ -63,7 +65,4 @@
             app:rippleColor="@color/black" />
 
 
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>-->

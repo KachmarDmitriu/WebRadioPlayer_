@@ -53,19 +53,19 @@ class PlayerActivity : AppCompatActivity()
         setupRecycler()
 
 
-/*
+
 
         // Add product list fragment if this is first creation
         val currentFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (currentFragment == null) {
-            val fragment = GenreFragment()
+            val fragment = PlaylistFragment() //GenreFragment()
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.fragment_container, fragment)
                 .commit()
         }
-*/
+
 
 
     }
@@ -73,8 +73,9 @@ class PlayerActivity : AppCompatActivity()
 
 
     private fun setupListeners() {
-        binding.buttonPlay.setOnClickListener { onPlay() }
-        binding.buttonStop.setOnClickListener { onStopPlaying() }
+        //для тестирования фрагмент контейнера
+   //     binding.buttonPlay.setOnClickListener { onPlay() }
+   //     binding.buttonStop.setOnClickListener { onStopPlaying() }
     }
 
 
