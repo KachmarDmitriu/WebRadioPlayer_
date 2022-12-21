@@ -8,13 +8,14 @@ import android.os.Bundle
 import android.os.IBinder
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import com.example.webradioplayer.PlayerService
 import com.example.webradioplayer.R
 import com.example.webradioplayer.databinding.PlayerActivityBinding
 import com.google.android.exoplayer2.MediaItem
 
 
-class PlayerActivity : AppCompatActivity()
+class PlayerFragment : AppCompatActivity()
 {
 
     private val viewBinding by lazy(LazyThreadSafetyMode.NONE) {
@@ -22,7 +23,7 @@ class PlayerActivity : AppCompatActivity()
     }
 
     private lateinit var playerService: PlayerService
-    private lateinit var binding: PlayerActivityBinding
+    private lateinit var binding:  PlayerActivityBinding
     private var mBound: Boolean = false
 
     /** Defines callbacks for service binding, passed to bindService()*/
@@ -52,30 +53,14 @@ class PlayerActivity : AppCompatActivity()
         setupListeners()
         setupRecycler()
 
-
-
-
-        // Add product list fragment if this is first creation
-        val currentFragment =
-            supportFragmentManager.findFragmentById(R.id.fragment_container)
-        if (currentFragment == null) {
-            val fragment = PlaylistFragment() //GenreFragment()
-            supportFragmentManager
-                .beginTransaction()
-                .add(R.id.fragment_container, fragment)
-                .commit()
-        }
-
-
-
     }
 
 
 
     private fun setupListeners() {
-        //для тестирования фрагмент контейнера
-   //     binding.buttonPlay.setOnClickListener { onPlay() }
-   //     binding.buttonStop.setOnClickListener { onStopPlaying() }
+
+        binding.buttonPlay.setOnClickListener { onPlay() }
+        binding.buttonStop.setOnClickListener { onStopPlaying() }
     }
 
 

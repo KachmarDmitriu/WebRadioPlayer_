@@ -9,7 +9,7 @@ import android.util.Log
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.example.webradioplayer.ui.PlayerActivity
+import com.example.webradioplayer.ui.PlayerFragment
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import kotlinx.coroutines.Dispatchers
@@ -50,7 +50,7 @@ class CustomPlayerNotificationManager(
 
         override fun createCurrentContentIntent(player: Player): PendingIntent? =
             PendingIntent.getActivity(
-                context, 0, Intent(context, PlayerActivity::class.java),
+                context, 0, Intent(context, PlayerFragment::class.java),
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
 
