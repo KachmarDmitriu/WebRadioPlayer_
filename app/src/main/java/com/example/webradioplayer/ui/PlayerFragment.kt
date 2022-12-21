@@ -11,7 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import com.example.webradioplayer.PlayerService
 import com.example.webradioplayer.R
-import com.example.webradioplayer.databinding.PlayerActivityBinding
+import com.example.webradioplayer.databinding.PlayerFragmentBinding // PlayerActivityBinding
+import com.example.webradioplayer.databinding.PlaylistFragmentBinding
 import com.google.android.exoplayer2.MediaItem
 
 
@@ -19,11 +20,11 @@ class PlayerFragment : AppCompatActivity()
 {
 
     private val viewBinding by lazy(LazyThreadSafetyMode.NONE) {
-        PlayerActivityBinding.inflate(layoutInflater)
+        PlaylistFragmentBinding.inflate(layoutInflater)
     }
 
     private lateinit var playerService: PlayerService
-    private lateinit var binding:  PlayerActivityBinding
+    private lateinit var binding: PlayerFragmentBinding
     private var mBound: Boolean = false
 
     /** Defines callbacks for service binding, passed to bindService()*/
@@ -46,7 +47,7 @@ class PlayerFragment : AppCompatActivity()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = PlayerActivityBinding.inflate(layoutInflater)
+        binding = PlayerFragmentBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
         setContentView(binding.root)
 

@@ -19,7 +19,7 @@
         android:name=".WebRadioPlayerApplication">
         <activity
             android:name=".ui.MainActivity"
-            android:exported="true">
+            >
 
         </activity>
         <service android:name=".PlayerService" />
