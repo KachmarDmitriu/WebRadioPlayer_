@@ -16,7 +16,7 @@ import com.example.webradioplayer.databinding.PlaylistFragmentBinding
 import com.google.android.exoplayer2.MediaItem
 
 
-class PlayerFragment : AppCompatActivity()
+class PlayerFragment : Fragment()
 {
 
     private val viewBinding by lazy(LazyThreadSafetyMode.NONE) {

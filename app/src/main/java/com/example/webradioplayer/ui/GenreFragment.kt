@@ -63,8 +63,8 @@ class GenreFragment: Fragment() {
 
 
     private fun init() {
-        setupRefresh()
-        setupRecycler()
+            //  setupRefresh()   для теста
+            // setupRecycler()  для теста
       //  observeUiState()
 
         viewModel.loadGenre()
