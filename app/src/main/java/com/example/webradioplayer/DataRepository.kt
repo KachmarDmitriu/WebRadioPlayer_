@@ -30,7 +30,6 @@ class DataRepository private constructor(context: Context){//private var mDataba
 
 
 
-
  //   private val mObservableGenre: LiveData<List<Genre>>
 
 /*
