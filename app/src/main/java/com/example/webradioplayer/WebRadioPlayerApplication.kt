@@ -12,6 +12,7 @@ class WebRadioPlayerApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        DataRepository.getInstance(this)
         setupTimber()
     }
 

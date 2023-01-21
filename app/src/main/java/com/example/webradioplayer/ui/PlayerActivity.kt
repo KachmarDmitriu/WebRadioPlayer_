@@ -8,23 +8,23 @@ import android.os.Bundle
 import android.os.IBinder
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
+import androidx.databinding.DataBindingUtil.setContentView
+import androidx.fragment.app.Fragment
 import com.example.webradioplayer.PlayerService
 import com.example.webradioplayer.R
-import com.example.webradioplayer.databinding.PlayerFragmentBinding // PlayerActivityBinding
-import com.example.webradioplayer.databinding.PlaylistFragmentBinding
+import com.example.webradioplayer.databinding.PlayerActivityBinding
 import com.google.android.exoplayer2.MediaItem
 
 
-class PlayerFragment : Fragment()
+class PlayerActivity : AppCompatActivity()
 {
 
     private val viewBinding by lazy(LazyThreadSafetyMode.NONE) {
-        PlaylistFragmentBinding.inflate(layoutInflater)
+        PlayerActivityBinding.inflate(layoutInflater)
     }
 
     private lateinit var playerService: PlayerService
-    private lateinit var binding: PlayerFragmentBinding
+    private lateinit var binding: PlayerActivityBinding
     private var mBound: Boolean = false
 
     /** Defines callbacks for service binding, passed to bindService()*/
@@ -47,7 +47,7 @@ class PlayerFragment : Fragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = PlayerFragmentBinding.inflate(layoutInflater)
+        binding = PlayerActivityBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
         setContentView(binding.root)
 
@@ -67,7 +67,7 @@ class PlayerFragment : Fragment()
 
    private fun setupRecycler() {
 
-     //   binding.recyclerView.adapter = CustomAdaper(listOf())
+       // binding.recyclerView.adapter = CustomAdaper(listOf())
 
     }
 
