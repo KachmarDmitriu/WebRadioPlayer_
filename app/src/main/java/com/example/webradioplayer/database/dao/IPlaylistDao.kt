@@ -9,7 +9,7 @@ interface IPlaylistDao {
 
     //получение всего плейлиста __ДЛЯ ТЕСТА_
    @Query("SELECT * FROM playlist_table ORDER BY name_radiostation")
-   fun getAllPlaylist(): LiveData<List<Playlist?>>
+   fun getAllPlaylist(): LiveData<List<Playlist>>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -17,5 +17,5 @@ interface IPlaylistDao {
 
 // получение плейлиста определенного жанра
     @Query("select * from playlist_table where id_genre_pls = :genreId")
-    fun loadPlaylist(genreId: Int): LiveData<List<Playlist?>>
+    fun loadPlaylist(genreId: Int): LiveData<List<Playlist>>
 }

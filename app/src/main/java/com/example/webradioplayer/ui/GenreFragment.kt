@@ -1,7 +1,6 @@
 package com.example.webradioplayer.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,7 +66,7 @@ class GenreFragment : Fragment() {
             viewLifecycleOwner,
             Observer { genres ->
                 genres?.let {
-                    Log.i(TAG, "Got genres ${genres.size}")
+                    Timber.tag(TAG).i("Got genres %s", genres.size)
                     updateUI(genres)
                 }
             }
@@ -76,7 +75,7 @@ class GenreFragment : Fragment() {
        // init()
     }
 
-    private fun updateUI(genres: List<Genre?>) {
+    private fun updateUI(genres: List<Genre>) {
         adapter = GenreAdapter(genres)
         genreRecyclerView.adapter = adapter
     }
@@ -186,7 +185,7 @@ class GenreFragment : Fragment() {
         }
     }
 
-    private inner class GenreAdapter(var genres: List<Genre?>)
+    private inner class GenreAdapter(var genres: List<Genre>)
         : RecyclerView.Adapter<GenreHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)

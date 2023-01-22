@@ -22,9 +22,9 @@ class PlaylistViewModel(private val repository: DataRepository): ViewModel() {
         _state.value = GenreSelected(genre)
     }
 
-    fun loadGenre(): LiveData<List<Genre?>> = repository.loadGenre()
+    fun loadGenre(): LiveData<List<Genre>> = repository.loadGenre()
 // Для работы реализовать передачу  ИД жанра выбора
-    fun loadPLaylist(genreId: Int): LiveData<List<Playlist?>> = repository.loadPlaylist(genreId)
+    fun loadPLaylist(genreId: Int): LiveData<List<Playlist>> = repository.loadPlaylist(genreId)
 
 //
 //fun insert(playlist: Playlist) = viewModelScope.launch {
