@@ -11,7 +11,7 @@ import com.example.webradioplayer.database.entity.Genre
 interface IGenreDao {
 
     @Query("SELECT * FROM genre_table ORDER BY genre_name")
-    fun getGenres(): LiveData<List<Genre>>
+    fun getGenres(): LiveData<List<Genre?>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertGenre(genre: Genre)

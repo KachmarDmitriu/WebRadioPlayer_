@@ -25,8 +25,8 @@ class DataRepository private constructor(context: Context){//private var mDataba
     private val genreDao = database.genreDao()
     private val playlistDao = database.playlistDao()
 
-    fun loadGenre(): LiveData<List<Genre>> = genreDao.getGenres()
-    fun loadPlaylist(genreId: Int): LiveData<List<Playlist>> = playlistDao.loadPlaylist(genreId)
+    fun loadGenre(): LiveData<List<Genre?>> = genreDao.getGenres()
+    fun loadPlaylist(genreId: Int): LiveData<List<Playlist?>> = playlistDao.loadPlaylist(genreId)
 
 
 
