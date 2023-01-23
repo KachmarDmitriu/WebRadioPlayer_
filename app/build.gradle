@@ -59,6 +59,9 @@ dependencies {
     implementation 'androidx.core:core-ktx:+'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'androidx.fragment:fragment:1.5.5'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.1.0'
+    testImplementation 'org.testng:testng:7.1.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 
     def exoplayer_version = "2.18.2"
     implementation "com.google.android.exoplayer:exoplayer-core:$exoplayer_version"

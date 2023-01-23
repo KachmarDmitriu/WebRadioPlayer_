@@ -16,6 +16,6 @@ interface IPlaylistDao {
     fun insertRadiostation(radiostation: Playlist)
 
 // получение плейлиста определенного жанра
-    @Query("select * from playlist_table where id_genre_pls = :genreId")
+    @Query("SELECT * FROM playlist_table WHERE id_genre_pls =(:genreId)")
     fun loadPlaylist(genreId: Int): LiveData<List<Playlist>>
 }
