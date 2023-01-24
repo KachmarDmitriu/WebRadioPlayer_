@@ -3,8 +3,10 @@ package com.example.webradioplayer.ui
 import android.os.Bundle
 import com.example.webradioplayer.R
 import androidx.appcompat.app.AppCompatActivity
+import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), GenreFragment.Callbacks
+{
 
   override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -20,12 +22,20 @@ class MainActivity : AppCompatActivity() {
                     .add(R.id.fragment_container, fragment)
                     .commit()
             }
-
     }
+
+
+    override fun onGenreSelected(genreId: UUID) {
+        val fragment = GenreFragment.newInstance(genreId)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
 }
-
 /*
-
 private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity(),

@@ -1,5 +1,6 @@
 package com.example.webradioplayer.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ import com.example.webradioplayer.viewmodel.GenreViewModel
 import com.example.webradioplayer.viewmodel.PlaylistViewModel
 import com.xwray.groupie.GroupieAdapter
 import timber.log.Timber
+import java.util.*
 
 private const val TAG = "GenreFragment"
 
@@ -32,7 +34,6 @@ class GenreFragment : Fragment() {
 
 
 
-
     private var mBinding: GenreFragmentBinding? = null
     private val binding get() = requireNotNull(mBinding)
 
@@ -41,6 +42,11 @@ class GenreFragment : Fragment() {
     private val genresAdapter by lazy {
         return@lazy GroupieAdapter()
     }
+
+    interface Callbacks {
+        fun onGenreSelected(genreId: UUID)
+    }
+    private var callbacks: Callbacks? = null
 
 
     override fun onCreateView(
@@ -79,6 +85,17 @@ class GenreFragment : Fragment() {
         adapter = GenreAdapter(genres)
         genreRecyclerView.adapter = adapter
     }
+
+    override fun onDetach() {
+        super.onDetach()
+        callbacks = null
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callbacks = context as Callbacks?
+    }
+
 
 
 
