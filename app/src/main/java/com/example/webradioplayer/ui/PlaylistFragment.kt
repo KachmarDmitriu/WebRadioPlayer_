@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProviders
 import com.example.webradioplayer.database.entity.Genre
 import com.example.webradioplayer.databinding.PlaylistFragmentBinding
 import com.example.webradioplayer.model.IPlaylist
@@ -21,6 +22,9 @@ private const val ARG_GENRE_ID = "genre_id"
 class PlaylistFragment : Fragment() {
 
     private lateinit var genre: Genre
+    private val playlistViewModel: PlaylistViewModel by lazy {
+        ViewModelProviders.of(this).get(PlaylistViewModel::class.java)
+    }
 
 
 
@@ -34,7 +38,7 @@ class PlaylistFragment : Fragment() {
         super.onCreate(savedInstanceState)
         genre = Genre()
         val genreId: UUID = arguments?.getSerializable(ARG_GENRE_ID) as UUID
-        PlaylistViewModel. *****  crimeDetailViewModel.loadCrime(genreId)
+        playlistViewModel.loadPLaylist(genreId)
     }
 
 
